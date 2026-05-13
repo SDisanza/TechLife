@@ -153,6 +153,7 @@ body {
   margin-top: 0;
   font-size: 1.2rem;
   margin-bottom: 10px;
+  transition: color 0.2s ease;
 }
 
 .value-item p {
@@ -160,4 +161,22 @@ body {
   color: #cccccc;
   line-height: 1.5;
   margin: 0;
+}
+
+.about-card:hover {
+  transform: translateY(-5px);                  
+  background: rgba(255, 255, 255, 0.07);       
+  border-color: rgba(0, 150, 255, 0.4);         
+  box-shadow: 0 12px 40px 0 rgba(0, 150, 255, 0.15); 
+}
+
+.value-item:hover{
+  transform: translateY(-5px);                  
+  background: rgba(255, 255, 255, 0.06);       
+  border-color: rgba(0, 150, 255, 0.3);         
+  box-shadow: 0 8px 25px 0 rgba(0, 0, 0, 0.4);  
+}
+
+.value-item:hover h3 {
+  color: #33a1ff; 
 }
