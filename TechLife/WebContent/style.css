@@ -1,0 +1,163 @@
+/*pagina index*/
+h1, p {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  color: #ffffff; 
+}
+
+p {
+  margin-bottom: 40px;
+  line-height: 1.6;
+  opacity: 0.9;  
+}
+
+body {
+  background: linear-gradient(135deg, #07111e 0%, #0c1f38 50%, #112d52 100%);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+#container {
+  display: flex;
+  justify-content: center;  
+  gap: 40px;                
+  max-width: 1000px;
+  margin: 0 auto;            
+  padding: 20px;
+  flex-wrap: wrap;           
+}
+
+
+.divHome {
+  flex: 1;                   
+  min-width: 150px;          
+  max-width: 200px;
+  background: rgba(255, 255, 255, 0.04);       
+  backdrop-filter: blur(12px);                  
+  -webkit-backdrop-filter: blur(12px);          
+  border-radius: 16px;                       
+  padding: 25px 15px;                           
+  border: 1px solid rgba(255, 255, 255, 0.1);   
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); 
+  transition: all 0.3s ease;                    
+}
+
+.divHome a {
+  display: flex;
+  flex-direction: column;    
+  align-items: center;       
+  text-align: center;        
+  text-decoration: none;     
+  color: #ffffff;                               
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: color 0.2s ease;   
+}
+
+.divHome img {
+  width: 100%;               
+  max-width: 120px;          
+  height: auto;              
+  margin-bottom: 15px;       
+  display: block;
+}
+
+
+.divHome:hover {
+  transform: translateY(-8px);                  
+  background: rgba(255, 255, 255, 0.09);       
+  border-color: rgba(0, 150, 255, 0.5);        
+  box-shadow: 0 12px 40px 0 rgba(0, 150, 255, 0.2); 
+}
+
+.divHome a:hover {
+  color: #33a1ff;
+}
+
+/*pagina chi siamo*/
+.nav-back {
+  max-width: 800px;
+  margin: 30px auto 0 auto;
+  padding: 0 20px;
+}
+.nav-back a {
+  color: #33a1ff;
+  text-decoration: none;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  transition: color 0.2s ease;
+}
+.nav-back a:hover {
+  color: #ffffff;
+}
+
+
+#about-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+
+.about-card {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  margin-bottom: 30px;
+}
+
+.about-card h2 {
+  color: #33a1ff; 
+  margin-top: 0;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.about-text {
+  text-align: left !important; 
+  color: #ffffff;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.about-text strong {
+  color: #33a1ff;
+}
+
+
+.values-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.value-item {
+  flex: 1;
+  min-width: 200px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: center;
+}
+
+.value-item h3 {
+  color: #ffffff;
+  margin-top: 0;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.value-item p {
+  font-size: 0.95rem;
+  color: #cccccc;
+  line-height: 1.5;
+  margin: 0;
+}
