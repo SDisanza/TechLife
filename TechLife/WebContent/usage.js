@@ -22,7 +22,8 @@ function onLocationFound(e)
 {
 	$('#loader').hide();
 	$('#ecommerce-message').removeClass('hidden-start').hide().fadeIn(500);
-    const marker = L.marker(e.latlng, {icon: redIcon}).addTo(map);
+	map.invalidateSize();
+	const marker = L.marker(e.latlng, {icon: redIcon}).addTo(map);
     latlngUser = e.latlng;
     radius = e.accuracy;
 
