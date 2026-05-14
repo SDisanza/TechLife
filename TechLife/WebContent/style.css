@@ -1,4 +1,6 @@
-/*pagina index*/
+/* ==========================================
+   1. PAGINA INDEX
+   ========================================== */
 h1, p {
   text-align: center;
   font-family: Arial, sans-serif;
@@ -80,54 +82,52 @@ body {
   color: #33a1ff;
 }
 
-/*navback*/
-
 /* ==========================================
    STILE PULSANTE "TORNA ALLA HOME" (LIQUID GLASS)
    ========================================== */
 .nav-back {
-  max-width: 1200px;        /* Si allinea alla larghezza massima dei blocchi del sito */
-  margin: 30px auto 0 auto; /* Spazio verticale dal bordo superiore dello schermo */
-  padding: 0 20px;          /* Allineamento millimetrico al margine sinistro */
+  max-width: 1200px;        
+  margin: 30px auto 0 auto;
+  padding: 0 20px;          
   box-sizing: border-box;
 }
 
 .nav-back a {
   display: inline-flex;
   align-items: center;
-  gap: 10px;                    /* Spazio orizzontale tra l'icona/freccia e la scritta */
-  background: rgba(255, 255, 255, 0.04);       /* Vetro liquido ultra-trasparente */
-  backdrop-filter: blur(10px);                  /* Effetto sfocatura dello sfondo scuro */
-  -webkit-backdrop-filter: blur(10px);          /* Supporto per browser Safari/iOS */
-  border: 1px solid rgba(255, 255, 255, 0.1);   /* Riflesso di luce sul bordo superiore */
-  border-radius: 8px;                           /* Angoli smussati moderni */
-  padding: 10px 20px;                           /* Dimensione interna per renderlo un pulsante vero */
-  color: #ffffff !important;                     /* Forza il testo in bianco puro leggibile */
-  text-decoration: none;                        /* Cancella la sottolineatura di default del link */
+  gap: 10px;                    
+  background: rgba(255, 255, 255, 0.04);       
+  backdrop-filter: blur(10px);                  
+  -webkit-backdrop-filter: blur(10px);          
+  border: 1px solid rgba(255, 255, 255, 0.1);   
+  border-radius: 8px;                           
+  padding: 10px 20px;                           
+  color: #ffffff !important;                    
+  text-decoration: none;                        
   font-family: Arial, sans-serif;
   font-weight: bold;
   font-size: 0.95rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);     /* Ombra per staccarlo dallo sfondo del sito */
-  transition: all 0.25s ease;                   /* Transizione morbida per l'effetto hover */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);     
+  transition: all 0.25s ease;                  
 }
 
-/* Effetto interattivo al passaggio del mouse (Hover) */
+
 .nav-back a:hover {
-  background: rgba(255, 255, 255, 0.09);       /* Il vetro diventa leggermente più visibile */
-  border-color: rgba(0, 150, 255, 0.5);         /* Il contorno si accende di azzurro neon */
-  color: #33a1ff !important;                    /* Il testo vira sull'azzurro medicale */
-  transform: translateX(-4px);                  /* Micro-spostamento dinamico verso sinistra */
-  box-shadow: 0 8px 32px rgba(0, 150, 255, 0.15); /* Bagliore azzurrato sotto il pulsante */
+  background: rgba(255, 255, 255, 0.09);       
+  border-color: rgba(0, 150, 255, 0.5);         
+  color: #33a1ff !important;                    
+  transform: translateX(-4px);                  
+  box-shadow: 0 8px 32px rgba(0, 150, 255, 0.15); 
 }
 
 
-/*pagina chi siamo*/
 
-/* ==========================================
-   3. PAGINA CHI SIAMO (STRUTTURA LIQUID GLASS)
-   ========================================== */
 
-/* Contenitore principale di Chi Siamo */
+/* ===================
+   3. PAGINA CHI SIAMO
+   =================== */
+
+
 #about-container {
   max-width: 900px;
   margin: 0 auto;
@@ -136,7 +136,7 @@ body {
   box-sizing: border-box;
 }
 
-/* Scheda principale in vetro liquido */
+
 .about-card {
   background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(12px);
@@ -149,30 +149,30 @@ body {
   box-sizing: border-box;
 }
 
-/* Titolo "Chi Siamo" interno alla scheda */
+
 .about-card h2 {
-  color: #33a1ff !important; /* Forza l'azzurro neon per staccare dallo sfondo */
+  color: #33a1ff !important; 
   margin-top: 0;
   font-size: 2rem;
   margin-bottom: 20px;
-  text-align: left; /* Allineato a sinistra per seguire il testo */
+  text-align: left; 
 }
 
-/* Testo della descrizione */
+
 .about-text {
-  text-align: left !important; /* Forza l'allineamento a sinistra per una lettura professionale */
-  color: #ffffff !important;   /* Testo bianco puro leggibile */
+  text-align: left !important; 
+  color: #ffffff !important;   
   font-size: 1.1rem;
   line-height: 1.7;
   margin-bottom: 20px;
 }
 
-/* Evidenziazione delle parole chiave in azzurro */
+
 .about-text strong {
   color: #33a1ff !important; 
 }
 
-/* Griglia dei 3 valori aziendali sotto la scheda */
+
 .values-grid {
   display: flex;
   gap: 20px;
@@ -180,11 +180,11 @@ body {
   width: 100%;
 }
 
-/* Le 3 mini-schede dei valori in vetro liquido */
+
 .value-item {
   flex: 1;
   min-width: 240px;
-  background: rgba(255, 255, 255, 0.03); /* Vetro leggermente più morbido */
+  background: rgba(255, 255, 255, 0.03); 
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-radius: 12px;
@@ -195,36 +195,38 @@ body {
   text-align: center;
 }
 
-/* Titoli dei valori (Trasparenza, Accessibilità, Su Misura) */
+
 .value-item h3 {
-  color: #33a1ff !important; /* Diventano azzurri per massima visibilità */
+  color: #33a1ff !important; 
   margin-top: 0;
   font-size: 1.25rem;
   margin-bottom: 12px;
   font-weight: bold;
 }
 
-/* Descrizione dei singoli valori */
+
 .value-item p {
   font-size: 0.95rem;
-  color: #dddddd !important; /* Grigio chiarissimo per distinguerlo dai titoli */
+  color: #dddddd !important; 
   line-height: 1.6;
   margin: 0;
-  text-align: center !important; /* Centrato all'interno del quadratino */
+  text-align: center !important; 
 }
 
-/* Ottimizzazione responsive per schermi piccoli */
+
 @media (max-width: 768px) {
   .about-card {
     padding: 25px 20px;
   }
   .value-item {
-    min-width: 100%; /* Va a capo in verticale sugli smartphone */
+    min-width: 100%; 
   }
 }
 
 
-/*pagina dove siamo*/
+/* ====================
+   3. PAGINA DOVE SIAMO
+   ==================== */
 
 .hidden-start {
   display: none !important;
@@ -341,7 +343,8 @@ body {
 .divider {
   width: 60%;
   height: 1px;
-  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, 
+  	rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
   margin-bottom: 20px;
 }
 
@@ -369,19 +372,19 @@ body {
 @media (max-width: 850px) {
   #mapcontainer {
     display: flex;
-    flex-direction: column; /* Dispone la mappa sopra e il testo sotto */
+    flex-direction: column; 
     gap: 20px;
   }
 
   .map-wrapper {
     width: 100%;
-    height: 400px;        /* FORZA un'altezza fissa in pixel su smartphone */
+    height: 400px;        
     min-height: 400px;
   }
 
   #control {
     width: 100%;
-    height: auto;         /* Il riquadro di testo si adatta alla lunghezza del messaggio */
+    height: auto;         
     min-height: auto;
   }
 }
