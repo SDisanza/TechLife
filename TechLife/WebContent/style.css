@@ -30,6 +30,13 @@ body {
   flex-wrap: wrap;           
 }
 
+.welcometext {
+  margin-bottom: 40px;
+  line-height: 1.8;
+  font-size: 1.15rem;
+  color: #ffffff;
+}
+
 
 .divHome {
   flex: 1;                   
@@ -81,6 +88,29 @@ body {
 .divHome a:hover {
   color: #33a1ff;
 }
+
+#register{
+	display: inline-block;
+  padding: 2px 10px;                            
+  background: rgba(255, 255, 255, 0.05);       
+  backdrop-filter: blur(4px);                   
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.15);  
+  border-radius: 6px;                           
+  color: #33a1ff !important;                    
+  text-decoration: none;                       
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+#register:hover {
+  background: rgba(51, 161, 255, 0.15);         
+  border-color: #33a1ff;                        
+  color: #ffffff !important;                    
+  box-shadow: 0 0 12px rgba(51, 161, 255, 0.3); 
+  transform: translateY(-1px);                  
+}
+
 
 /* ==========================================
    STILE PULSANTE "TORNA ALLA HOME" (LIQUID GLASS)
@@ -388,3 +418,141 @@ body {
     min-height: auto;
   }
 }
+
+/* ================
+   5. PAGINA LOGIN 
+   ================ */
+
+
+.login-container-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh; 
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+
+.login-card {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 40px 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  width: 100%;
+  max-width: 400px; 
+  box-sizing: border-box;
+}
+
+
+.login-card h2 {
+  color: #33a1ff !important;
+  margin-top: 0;
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.input-group label {
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+}
+
+
+.input-group input {
+  width: 100%;
+  padding: 12px 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: all 0.25s ease;
+}
+
+
+.input-group input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #33a1ff; 
+  box-shadow: 0 0 10px rgba(51, 161, 255, 0.3);
+}
+
+
+.button-group {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+  width: 100%;
+}
+
+
+.button-group input {
+  flex: 1;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+
+.btn-submit {
+  background: #33a1ff;
+  border: 1px solid #33a1ff;
+  color: #07111e; 
+}
+.btn-submit:hover {
+  background: #55b2ff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(51, 161, 255, 0.4);
+}
+
+
+.btn-reset {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+.btn-reset:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+
+.register-text {
+  font-size: 0.95rem;
+  color: #cccccc !important;
+  text-align: center;
+  margin-top: 20px;
+}
+.register-text a {
+	color: #33a1ff;
+	text-decoration: none;
+	font-weight: bold;
+	transition: color 0.2s ease;
+}
+.register-text a:hover {
+  	color: #ffffff;
+  	text-decoration: underline;
+}
+
