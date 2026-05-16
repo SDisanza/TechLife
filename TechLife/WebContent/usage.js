@@ -42,3 +42,34 @@ function onLocationError(e) {
     document.getElementById("text").textContent =
     ('Ricorda che se non autorizzi l\'accesso alla posizione non potrai utilizzare il servizio');
 }
+
+function generaPasswordSicura() {
+	const inputPassword = document.getElementById("password");
+	const btnToggle = document.getElementById("btn-toggle-password");
+	const caratteri = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=";
+	const lunghezza = 14;
+	let passwordGenerata = "";
+	  
+	for (let i = 0; i < lunghezza; i++) {
+		const indiceCasuale = Math.floor(Math.random() * caratteri.length);
+		passwordGenerata += caratteri.charAt(indiceCasuale);
+	}
+	  
+	inputPassword.value = passwordGenerata;
+	inputPassword.type = "text"; 
+	btnToggle.textContent = "🙈"; 
+}
+
+function togglePasswordVisibilita() {
+	const inputPassword = document.getElementById("password");
+	const btnToggle = document.getElementById("btn-toggle-password");
+	  
+	if (inputPassword.type === "password") {
+		inputPassword.type = "text";
+		btnToggle.textContent = "🙈"; 
+	} else {
+		inputPassword.type = "password";
+		btnToggle.textContent = "👁️"; 
+	}
+}
+
