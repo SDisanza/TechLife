@@ -105,11 +105,9 @@ function gestisciDomicilio() {
 
     if (checkbox.checked) {
         divDomicilio.style.display = "block";
-        // Se il domicilio è diverso, questi campi diventano obbligatori
         inputsDomicilio.forEach(i => i.required = true);
     } else {
         divDomicilio.style.display = "none";
-        // Se torna uguale, svuota i campi e toglie l'obbligo
         inputsDomicilio.forEach(i => {
             i.required = false;
             i.value = "";

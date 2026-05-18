@@ -36,9 +36,10 @@ PRIMARY KEY(`ID`)
 Create table Prodotto(
 `ID` int not Null auto_increment,
 `Nome` varchar(50) not NULL,
+`Categoria` varchar(50) not NULL,
 `Prezzo` decimal(8,2) not Null,
 `Foto` varchar(100) not NULL,
-`Descrizione` varchar(100) not NULL,
+`Descrizione` varchar(10000) not NULL,
 PRIMARY KEY(`ID`)
 );
 
@@ -63,4 +64,23 @@ FOREIGN KEY (`ID_Ordine`) REFERENCES Ordine(`ID`),
 FOREIGN KEY (`ID_Prodotto`) REFERENCES Prodotto(`ID`)
 );
 
+INSERT INTO AnagraficaUtente (Nome, Cognome, Codice_Fiscale, Luogo_di_Nascita, Data_di_Nascita, Comune_Residenza, Indirizzo_Residenza, CAP_Residenza, 
+	Comune_Domicilio, Indirizzo_Domicilio, CAP_Domicilio, Email, Password) VALUES 
+('Mario', 'Rossi', 'RSSMRA80A01H501U', 'Roma', '1980-01-01', 'Roma', 'Via Nazionale 15', '00184', 'Roma', 'Via Nazionale 15', '00184', 'mario.rossi@email.com', 'Password123!'),
+('Luca', 'Bianhi', 'BNCLCU85M10F205H', 'Milano', '1985-05-10', 'Milano', 'Corso Buenos Aires 42', '20124', 'Fisciano', 'Via Giovanni Paolo II', '84084', 'luca.bianchi@email.com', 'TechLife2026!'),
+('Giovanna', 'Verdi', 'VRDGNN90R41L219Z', 'Torino', '1990-10-22', 'Torino', 'Via Roma 100', '10121', 'Torino', 'Via Roma 100', '10121', 'giovanna.verdi@email.com', 'SalvaVita2026!');
 
+INSERT INTO AnagraficaPIVA (NomeAzienda, Partita_IVA, Indirizzo_Legale, CAP_Legale, Comune_Legale, PEC, Email, Password) VALUES 
+('FitLife S.r.l.', '01234560123', 'Via dello Sport 8', '84084', 'Fisciano', 'fitlifesrl@legalmail.it', 'info@fitlife.it', 'PalestraSicura26!'),
+('Centro Medico San Raffaele SpA', '09876543210', 'Via dei Cedri 45', '20132', 'Milano', 'sanraffaelespa@pec.it', 'acquisti@sanraffaele.it', 'MedicalTech2026!');
+
+INSERT INTO Prodotto(Nome, Categoria, Prezzo, Foto, Descrizione) VALUES
+("Philips HeartStart FRx", "DAE", "199.99","img/prodotti/DAE_Philips.jpg", "Philips HeartStart FRx è un defibrillatore semiautomatico portatile completo di batteria, 
+coppia elettrodi smart e borsa morbida. Estremamente robusto, semplice da usare guida l’utente attraverso il processo di rianimazione di una vittima colpita da arresto cardiaco improvviso."),
+("LifePack 35", "Monitor", "1999.99", "img/prodotti/LifePack35.jpg", "LIFEPAK 35 è un monitor/defibrillatore clinicamente avanzato con strumenti e tecnologie brevettati e basati 
+su una piattaforma intuitiva e moderna3 per offrire ai pazienti cure avanzate.
+Si tratta di un dispositivo pronto per il futuro, progettato per promuovere un'assistenza cardiaca affidabile1 e raggiungere l'eccellenza clinica nell’ambiente sanitario moderno di oggi."),
+("Aspiratore SuperVega", "Aspiratore", "299.99", "img/prodotti/Aspiratore.jpg", "L'aspiratore a batteria Supervega 118 è un dispositivo medico portatile progettato per l'aspirazione di fluidi 
+nasali, orali e tracheali in adulti e bambini. Questo apparecchio è ideale per l'uso in ambulanze grazie alla sua versatilità e alla possibilità di funzionare in diverse modalità."),
+("Spencer Kompakt 170", "Ventilatore Polmonare", "849.99", "img/prodotti/VentilatorePolmonare.jpg", "Respiratore Kompak con valigetta: la valigetta contiene il respiratore 170 NTX e la 
+bombola di ossigeno con regolatore della pressione, pronta all’uso. Respiratori polmonari elettronici per la ventilazione non invasiva di adulti e pazienti pediatrici.");

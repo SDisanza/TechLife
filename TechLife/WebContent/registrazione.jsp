@@ -6,9 +6,9 @@
 		<meta charset="UTF-8">
 		<title>Registrazione - Tech Life</title>
 		<link type="text/css" rel="stylesheet" href="style.css">
+		<script src = "usage.js"></script>
 	</head>
 	<body>
-		<script src = "usage.js"></script>
 		<div class="nav-back">
 			<a href="index.html">&larr; Torna alla Home</a>
 		</div>
