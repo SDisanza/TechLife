@@ -73,3 +73,46 @@ function togglePasswordVisibilita() {
 	}
 }
 
+function cambiaScheda(tipo) {
+	var divPrivato = document.getElementById("sezione-privato");
+	var divAzienda = document.getElementById("sezione-azienda");
+	var inputTipo = document.getElementById("tipo_utente_nascosto");
+
+	
+	var inputsPrivato = divPrivato.querySelectorAll("input");
+	var inputsAzienda = divAzienda.querySelectorAll("input");
+
+	if (tipo === 'privato') {
+		divPrivato.style.display = "block";
+		divAzienda.style.display = "none";
+		inputTipo.value = "privato";
+		inputsPrivato.forEach(i => { if(!i.hasAttribute('data-opzionale')) i.required = true; });
+		inputsAzienda.forEach(i => i.required = false);
+	} else {
+		divPrivato.style.display = "none";
+		divAzienda.style.display = "block";
+		inputTipo.value = "azienda";
+		
+		inputsPrivato.forEach(i => i.required = false);
+		inputsAzienda.forEach(i => i.required = true);
+	}
+}
+
+function gestisciDomicilio() {
+    var checkbox = document.getElementById("domicilio_diverso");
+    var divDomicilio = document.getElementById("campi-domicilio");
+    var inputsDomicilio = divDomicilio.querySelectorAll("input");
+
+    if (checkbox.checked) {
+        divDomicilio.style.display = "block";
+        // Se il domicilio è diverso, questi campi diventano obbligatori
+        inputsDomicilio.forEach(i => i.required = true);
+    } else {
+        divDomicilio.style.display = "none";
+        // Se torna uguale, svuota i campi e toglie l'obbligo
+        inputsDomicilio.forEach(i => {
+            i.required = false;
+            i.value = "";
+        });
+    }
+}

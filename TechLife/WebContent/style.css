@@ -1,6 +1,6 @@
-/* ==========================================
+/* ===============
    1. PAGINA INDEX
-   ========================================== */
+   =============== */
 h1, p {
   text-align: center;
   font-family: Arial, sans-serif;
@@ -111,10 +111,6 @@ body {
   transform: translateY(-1px);                  
 }
 
-
-/* ==========================================
-   STILE PULSANTE "TORNA ALLA HOME" (LIQUID GLASS)
-   ========================================== */
 .nav-back {
   max-width: 1200px;        
   margin: 30px auto 0 auto;
@@ -154,7 +150,7 @@ body {
 
 
 /* ===================
-   3. PAGINA CHI SIAMO
+   2. PAGINA CHI SIAMO
    =================== */
 
 
@@ -420,7 +416,7 @@ body {
 }
 
 /* ================
-   5. PAGINA LOGIN 
+   4. PAGINA LOGIN 
    ================ */
 
 
@@ -709,4 +705,58 @@ body {
 
 #btn-toggle-password:hover {
   transform: scale(1.1);
+}
+
+.registration-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.registration-toggle button {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  color: #ffffff;
+  padding: 12px 24px;
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.registration-toggle button:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(51, 161, 255, 0.5);
+}
+
+.registration-toggle button.active {
+  background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+  border-color: transparent;
+  box-shadow: 0 4px 15px rgba(0, 102, 204, 0.4);
+}
+
+.form-group-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 25px 0;
+  text-align: left;
+}
+
+.form-group-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #33a1ff; 
+}
+
+.form-group-checkbox label {
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 0; 
 }
