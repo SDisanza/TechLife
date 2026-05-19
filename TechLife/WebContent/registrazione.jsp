@@ -6,7 +6,6 @@
 		<meta charset="UTF-8">
 		<title>Registrazione - Tech Life</title>
 		<link type="text/css" rel="stylesheet" href="style.css">
-		<script src = "usage.js"></script>
 	</head>
 	<body>
 		<div class="nav-back">
@@ -127,6 +126,7 @@
 				</div>
 			</form>
 		</div>
+		<script src = "script/usage.js"></script>
 	</body>
 </html>
     
