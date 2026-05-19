@@ -28,10 +28,10 @@
 					<strong>Tech Life</strong> nasce con un obiettivo chiaro e ambizioso: essere il primo sito di e-commerce dove poter acquistare dispositivi salvavita in base alle proprie reali esigenze. 
 				</p>
 				<p class="about-text">
-					Abbiamo deciso di rompere gli schemi del mercato tradizionale: con noi, <strong>niente piÃ¹ cataloghi complessi o scontistiche vincolate a pacchetti aggiuntivi</strong> obbligatori. Crediamo che la sicurezza e la protezione della vita non debbano essere ostacolate da burocrazia commerciale o costi nascosti.
+					Abbiamo deciso di rompere gli schemi del mercato tradizionale: con noi, <strong>niente più cataloghi complessi o scontistiche vincolate a pacchetti aggiuntivi</strong> obbligatori. Crediamo che la sicurezza e la protezione della vita non debbano essere ostacolate da burocrazia commerciale o costi nascosti.
 				</p>
 				<p class="about-text">
-					La nostra missione Ã¨ abbattere le barriere d'accesso alla cardioprotezione, permettendo a privati, aziende, scuole e palestre di comprare i dispositivi salvavita a seconda delle proprie necessitÃ , in modo <strong>facile, trasparente e veloce</strong>. 
+					La nostra missione è abbattere le barriere d'accesso alla cardioprotezione, permettendo a privati, aziende, scuole e palestre di comprare i dispositivi salvavita a seconda delle proprie necessità , in modo <strong>facile, trasparente e veloce</strong>. 
 				</p>
 			</div>
 
@@ -42,7 +42,7 @@
 					<p>Prezzi chiari fin da subito. Nessun preventivo personalizzato o venditore insistente.</p>
 				</div>
 				<div class="value-item">
-					<h3>AccessibilitÃ </h3>
+					<h3>Accessibilità </h3>
 					<p>Un processo guidato e rapido per permettere a chiunque di salvare una vita.</p>
 				</div>
 				<div class="value-item">
