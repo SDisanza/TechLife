@@ -65,14 +65,13 @@ FOREIGN KEY (`ID_Prodotto`) REFERENCES Prodotto(`ID`)
 
 INSERT INTO AnagraficaUtente (Nome, Cognome, Codice_Fiscale, Luogo_di_Nascita, Data_di_Nascita, Comune_Residenza, Indirizzo_Residenza, CAP_Residenza, 
 	Comune_Domicilio, Indirizzo_Domicilio, CAP_Domicilio, Email, Password) VALUES 
-('Mario', 'Rossi', 'RSSMRA80A01H501U', 'Roma', '1980-01-01', 'Roma', 'Via Nazionale 15', '00184', 'Roma', 'Via Nazionale 15', '00184', 'mario.rossi@email.com', 'Password123!'),
-('Luca', 'Bianhi', 'BNCLCU85M10F205H', 'Milano', '1985-05-10', 'Milano', 'Corso Buenos Aires 42', '20124', 'Fisciano', 'Via Giovanni Paolo II', '84084', 'luca.bianchi@email.com', 'TechLife2026!'),
-('Giovanna', 'Verdi', 'VRDGNN90R41L219Z', 'Torino', '1990-10-22', 'Torino', 'Via Roma 100', '10121', 'Torino', 'Via Roma 100', '10121', 'giovanna.verdi@email.com', 'SalvaVita2026!'),
+('Luca', 'Bianhi', 'BNCLCU85M10F205H', 'Milano', '1985-05-10', 'Milano', 'Corso Buenos Aires 42', '20124', 'Fisciano', 'Via Giovanni Paolo II', '84084', 'luca.bianchi@email.com', 'prMYfOn007DCYfHouiK0L3FeK9qEoE6cRZb5zXD+HBc='),
+('Giovanna', 'Verdi', 'VRDGNN90R41L219Z', 'Torino', '1990-10-22', 'Torino', 'Via Roma 100', '10121', 'Torino', 'Via Roma 100', '10121', 'giovanna.verdi@email.com', 'RTstxmLkKFzMj2lW87awU30kEnqFXUS0a+FH2dDus0o='),
 ('Mario', 'Rossi', 'RSSMRA80A01H501U', 'Roma', '1980-01-01', 'Roma', 'Via Roma 1', '00100','Roma', 'Via Roma 1', '00100', 'test@privato.it', '75K3eLr+dx6JJFuJ7LwIpEpOFmwGZZkRiB84PURz6U8=');
 
 INSERT INTO AnagraficaPIVA (NomeAzienda, Partita_IVA, Indirizzo_Legale, CAP_Legale, Comune_Legale, PEC, Email, Password) VALUES 
-('FitLife S.r.l.', '01234560123', 'Via dello Sport 8', '84084', 'Fisciano', 'fitlifesrl@legalmail.it', 'info@fitlife.it', 'PalestraSicura26!'),
-('Centro Medico San Raffaele SpA', '09876543210', 'Via dei Cedri 45', '20132', 'Milano', 'sanraffaelespa@pec.it', 'acquisti@sanraffaele.it', 'MedicalTech2026!');
+('FitLife S.r.l.', '01234560123', 'Via dello Sport 8', '84084', 'Fisciano', 'fitlifesrl@legalmail.it', 'info@fitlife.it', 'EPiaglQ6PIvwP3/AeacUzbWdpMKfsUMldezbLY/Qruo='),
+('Centro Medico San Raffaele SpA', '09876543210', 'Via dei Cedri 45', '20132', 'Milano', 'sanraffaelespa@pec.it', 'acquisti@sanraffaele.it', 'wzcxIPSLBT091WU+G+inbqNmmxgDb6+9aIu/oNDEDzg=');
 
 INSERT INTO Prodotto(Nome, Categoria, Prezzo, Foto, Descrizione) VALUES
 ("Philips HeartStart FRx", "DAE", "199.99","img/prodotti/DAE_Philips.jpg","Philips HeartStart FRx è un defibrillatore semiautomatico portatile completo di batteria, 
