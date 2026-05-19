@@ -8,14 +8,21 @@
 		<link type="text/css" rel="stylesheet" href="style.css">
 	</head>
 	<body>
+	<%if (session != null && session.getAttribute("utente") != null) 
+    {
+        response.sendRedirect("ALogin/homelogin.jsp");
+        return;
+    }%>
 		<div class="nav-back">
-				<a href="index.html">&larr; Torna alla Home</a>
+				<a href="index.jsp">&larr; Torna alla Home</a>
 		</div>
 		
 		<div class="login-container-page">
 			<div class="login-card">
 				<h2>Accedi a Tech Life</h2>
-				
+				<% if (request.getAttribute("errorMessage") != null) { %>
+    <p style="color: red; text-align: center;"><%= request.getAttribute("errorMessage") %></p>
+<% } %>
 				<form action="LoginServlet" method="post">
 					
 					<div class="input-group">

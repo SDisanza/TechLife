@@ -1,3 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="model.UtenteBean" %>
+<% UtenteBean utenteDoveSiamo = (UtenteBean) session.getAttribute("utente");
+    String homeDestinazione = "index.jsp";
+    if (utenteDoveSiamo != null) {
+        homeDestinazione = "ALogin/homelogin.jsp";
+    }
+%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -16,7 +24,7 @@
 	</head>
 	<body>
 		<div class="nav-back">
-			<a href="index.html">&larr; Torna alla Home</a>
+			<a href="index.jsp">&larr; Torna alla Home</a>
 		</div>
 		<h1>Dove Siamo</h1>				
 			<div id="mapcontainer">
@@ -31,8 +39,8 @@
 			    <div id="control">
 					<div id="ecommerce-message" class="ecommerce-info-box hidden-start">					
 					<i class="fas fa-laptop-medical info-icon"></i>
-					<h2>Tech Life è Digitale</h2>
-					<p class="main-message">“Dovunque. Ovunque tu ne abbia bisogno, così da supportarti sempre.”</p>
+					<h2>Tech Life È Digitale</h2>
+					<p class="main-message">Dovunque. Ovunque tu ne abbia bisogno, cosi da supportarti sempre.</p>
 					<div class="divider"></div>
 					<p class="sub-message">
 						Essendo un e-commerce specializzato, non abbiamo un negozio fisico aperto al pubblico. Questo ci permette di abbattere i costi di gestione e garantirti i migliori prodotti sul mercato a prezzi d'ingrosso, senza pacchetti aggiuntivi.

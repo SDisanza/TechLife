@@ -9,7 +9,7 @@
 	</head>
 	<body>
 		<div class="nav-back">
-			<a href="index.html">&larr; Torna alla Home</a>
+			<a href="index.jsp">&larr; Torna alla Home</a>
 		</div>
 
 		<h1>Crea il tuo Account</h1>

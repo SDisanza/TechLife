@@ -6,6 +6,11 @@
 		<link type="text/css" rel="stylesheet" href="style.css">
 	</head>
 	<body>
+	<%if (session != null && session.getAttribute("utente") != null) 
+	{
+        response.sendRedirect("ALogin/homelogin.jsp");
+        return;
+    }%>
 		<h1>Benvenuto in Tech Life!</h1><br>
 		<p class="welcometext">Se sei nuovo in TechLife <a id="register" href="registrazione.jsp">REGISTRATI</a>
 		<p>e scopri il nostro vasto catalogo;<br>
@@ -25,13 +30,13 @@
 			</div>
 			
 			<div class="divHome">
-				<a href="chi siamo.html">
+				<a href="chi siamo.jsp">
 				<img src="img/index/chisiamoblu.png" alt="Chi Siamo">
 				<span>Chi Siamo</span></a>
 			</div>
 			
 			<div class="divHome">
-				<a href="dove siamo.html">
+				<a href="dove siamo.jsp">
 				<img src="img/index/mappablu.png" alt="Dove Siamo">
 				<span>Dove Siamo</span></a>
 			</div>
