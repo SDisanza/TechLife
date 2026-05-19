@@ -29,7 +29,7 @@ Create table AnagraficaPIVA(
 `Comune_Legale` varchar(50) not Null,
 `PEC` varchar(50) not NULL,
 `Email` varchar(50) not NULL,
-`Password` varchar(50) not NULL,
+`Password` varchar(500) not NULL,
 PRIMARY KEY(`ID`)
 );
 
@@ -46,11 +46,10 @@ PRIMARY KEY(`ID`)
 Create table Ordine(
 `ID` int not Null auto_increment,
 `ID_Cliente` int not Null,
+`Tipo_Cliente` varchar(10) not Null,
 `Data_Ordine` datetime not Null,
 `Totale_Ordine` decimal(10,2) not Null,
-PRIMARY KEY(`ID`),
-FOREIGN KEY (`ID_Cliente`) REFERENCES AnagraficaUtente(`ID`),
-FOREIGN KEY (`ID_Cliente`) REFERENCES AnagraficaPIVA(`ID`)
+PRIMARY KEY(`ID`)
 );
 
 Create table DettaglioOrdine(
@@ -68,14 +67,15 @@ INSERT INTO AnagraficaUtente (Nome, Cognome, Codice_Fiscale, Luogo_di_Nascita, D
 	Comune_Domicilio, Indirizzo_Domicilio, CAP_Domicilio, Email, Password) VALUES 
 ('Mario', 'Rossi', 'RSSMRA80A01H501U', 'Roma', '1980-01-01', 'Roma', 'Via Nazionale 15', '00184', 'Roma', 'Via Nazionale 15', '00184', 'mario.rossi@email.com', 'Password123!'),
 ('Luca', 'Bianhi', 'BNCLCU85M10F205H', 'Milano', '1985-05-10', 'Milano', 'Corso Buenos Aires 42', '20124', 'Fisciano', 'Via Giovanni Paolo II', '84084', 'luca.bianchi@email.com', 'TechLife2026!'),
-('Giovanna', 'Verdi', 'VRDGNN90R41L219Z', 'Torino', '1990-10-22', 'Torino', 'Via Roma 100', '10121', 'Torino', 'Via Roma 100', '10121', 'giovanna.verdi@email.com', 'SalvaVita2026!');
+('Giovanna', 'Verdi', 'VRDGNN90R41L219Z', 'Torino', '1990-10-22', 'Torino', 'Via Roma 100', '10121', 'Torino', 'Via Roma 100', '10121', 'giovanna.verdi@email.com', 'SalvaVita2026!'),
+('Mario', 'Rossi', 'RSSMRA80A01H501U', 'Roma', '1980-01-01', 'Roma', 'Via Roma 1', '00100','Roma', 'Via Roma 1', '00100', 'test@privato.it', '75K3eLr+dx6JJFuJ7LwIpEpOFmwGZZkRiB84PURz6U8=');
 
 INSERT INTO AnagraficaPIVA (NomeAzienda, Partita_IVA, Indirizzo_Legale, CAP_Legale, Comune_Legale, PEC, Email, Password) VALUES 
 ('FitLife S.r.l.', '01234560123', 'Via dello Sport 8', '84084', 'Fisciano', 'fitlifesrl@legalmail.it', 'info@fitlife.it', 'PalestraSicura26!'),
 ('Centro Medico San Raffaele SpA', '09876543210', 'Via dei Cedri 45', '20132', 'Milano', 'sanraffaelespa@pec.it', 'acquisti@sanraffaele.it', 'MedicalTech2026!');
 
 INSERT INTO Prodotto(Nome, Categoria, Prezzo, Foto, Descrizione) VALUES
-("Philips HeartStart FRx", "DAE", "199.99","img/prodotti/DAE_Philips.jpg", "Philips HeartStart FRx è un defibrillatore semiautomatico portatile completo di batteria, 
+("Philips HeartStart FRx", "DAE", "199.99","img/prodotti/DAE_Philips.jpg","Philips HeartStart FRx è un defibrillatore semiautomatico portatile completo di batteria, 
 coppia elettrodi smart e borsa morbida. Estremamente robusto, semplice da usare guida l’utente attraverso il processo di rianimazione di una vittima colpita da arresto cardiaco improvviso."),
 ("LifePack 35", "Monitor", "1999.99", "img/prodotti/LifePack35.jpg", "LIFEPAK 35 è un monitor/defibrillatore clinicamente avanzato con strumenti e tecnologie brevettati e basati 
 su una piattaforma intuitiva e moderna3 per offrire ai pazienti cure avanzate.
