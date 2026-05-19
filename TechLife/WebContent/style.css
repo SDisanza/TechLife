@@ -962,3 +962,91 @@ body {
   justify-content: center;
   min-width: 14px;
 }
+/* ==================
+   7.PAGINA HOMELOGIN
+   ================== */
+   
+.logout-container {
+    text-align: center;
+    margin: 15px 20px;
+}
+
+.btn-logout {
+    color: #ff3333;
+    text-decoration: none;
+    font-weight: bold;
+    border: 2px solid #ff3333;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+
+.btn-logout:hover {
+    background-color: #ff3333;
+    color: white;
+}
+
+/* ===============
+   8.PAGINA UTENTE
+   =============== */
+
+#profile-container.about-card {
+    max-width: 650px;
+    margin: 40px auto;
+    padding: 35px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #eef2f5;
+}
+
+.profile-header {
+    text-align: center;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 20px;
+    margin-bottom: 25px;
+}
+
+.profile-header h2 {
+	text-align: center;
+    color: #1e293b;
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.profile-header p {
+    color: #64748b;
+    font-size: 15px;
+}
+
+.profile-header strong {
+    color: #0284c7;
+    font-weight: 600;
+}
+
+.profile-details {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.info-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f8fafc;
+}
+
+.info-label {
+    font-weight: 600;
+    color: #475569;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-value {
+    color: #0f172a;
+    font-size: 16px;
+    font-variant-numeric: tabular-nums; 
+}
