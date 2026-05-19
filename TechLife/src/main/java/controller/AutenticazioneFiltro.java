@@ -1,0 +1,39 @@
+package controller;
+
+import java.io.IOException;
+import jakarta.servlet.Filter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.FilterConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.annotation.WebFilter;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
+@WebFilter(urlPatterns = {"/ALogin/*"})
+public class AutenticazioneFiltro implements Filter {
+
+    public void init(FilterConfig fConfig) throws ServletException {}
+
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+        throws IOException, ServletException {
+    
+	    HttpServletRequest httpRequest = (HttpServletRequest) request;
+	    HttpServletResponse httpResponse = (HttpServletResponse) response;
+	    HttpSession session = httpRequest.getSession(false);
+	    
+	    boolean loggato = (session != null && session.getAttribute("utente") != null);
+	
+	    if (loggato) {
+	        chain.doFilter(request, response);
+	    } else {
+	        httpResponse.sendRedirect(httpRequest.getContextPath() + "/login.jsp");
+	    }
+    }
+
+    public void destroy() {
+        
+    }
+}
