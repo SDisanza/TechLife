@@ -1051,3 +1051,64 @@ body {
     font-size: 16px;
     font-variant-numeric: tabular-nums; 
 }
+
+/* ================
+   9. PAGINA ERRORE
+   ================ */
+
+.error-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.error-wrapper {
+    max-width: 550px;
+    width: 100%;
+}
+
+.error-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.error-code-title {
+    font-size: 5.5rem;
+    margin: 0;
+    font-weight: bold;
+    color: #ff4444;
+    text-shadow: 0 0 10px rgba(255, 68, 68, 0.3);
+}
+
+.error-subtitle h2{
+	text-align: center;
+    color: #33a1ff;
+    font-size: 1.8rem;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.error-description {
+    color: #ffffff;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 35px;
+    opacity: 0.9;
+}
+
+.error-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
