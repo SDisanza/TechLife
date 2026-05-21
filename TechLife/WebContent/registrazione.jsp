@@ -21,7 +21,13 @@
 				<button type="button" onclick="cambiaScheda('azienda')">Registrazione Azienda / P.IVA</button>
 			</div>
 			
-			<form action="" method="POST" class="register-card">
+			<% if (request.getAttribute("errorMessage") != null) { %>
+	    		<% if (request.getAttribute("errorMessage") != null) { %>
+	    			<p class="auth-error-text registration-error"><%= request.getAttribute("errorMessage") %></p>
+				<% } %>
+			<% } %>
+			
+			<form action="RegistrazioneServlet" method="POST" class="register-card">
 				<input type="hidden" id="tipo_utente_nascosto" name="tipo_utente" value="privato">
 				
 				<div id="sezione-privato">
@@ -35,7 +41,7 @@
 					</div>
 					<div class="form-group">
 						<label for="codice_fiscale">Codice Fiscale</label>
-						<input type="text" id="codice_fiscale" name="codice_fiscale" placeholder="Inserisci il tuo Codice Fiscale">
+						<input type="text" id="cf" name="codice_fiscale" placeholder="Inserisci il tuo Codice Fiscale">
 					</div>
 					<div class="form-group">
 						<label for="luogo_nascita">Luogo di Nascita</label>

@@ -31,7 +31,7 @@ function togglePasswordVisibilita() {
 function cambiaScheda(tipo) {
 	var divPrivato = document.getElementById("sezione-privato");
 	var divAzienda = document.getElementById("sezione-azienda");
-	var inputTipo = document.getElementById("tipo_utente_nascosto");
+	var inputTipo = document.getElementById("tipo_utente_nascosto").value = tipo;
 
 	
 	var inputsPrivato = divPrivato.querySelectorAll("input");

@@ -534,6 +534,13 @@ body {
   border-color: rgba(255, 255, 255, 0.4);
 }
 
+.auth-error-text {
+    color: #ff4444 !important;
+    text-align: center !important;
+    font-weight: 600;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
 
 .register-text {
   font-size: 0.95rem;
@@ -541,6 +548,11 @@ body {
   text-align: center;
   margin-top: 20px;
 }
+
+/* =======================
+   5. PAGINA REGISTRAZIONE 
+   ======================= */
+   
 .register-text a {
 	color: #33a1ff;
 	text-decoration: none;
@@ -560,10 +572,10 @@ body {
   font-family: Arial, sans-serif;
 }
 
-/* =======================
-   5. PAGINA REGISTRAZIONE 
-   ======================= */
-   
+.auth-error-text.registration-error {
+    font-weight: bold !important;
+}
+
 .register-card {
   background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(12px);
@@ -963,6 +975,12 @@ body {
   justify-content: center;
   min-width: 14px;
 }
+
+.product-cart-form {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
 /* ==================
    7.PAGINA HOMELOGIN
    ================== */
@@ -1111,4 +1129,103 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
+}
+
+/* =============================
+   10. SEZIONE SPEDIZIONE UTENTE
+   ============================= */
+
+.address-align-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.text-left {
+    text-align: left;
+}
+
+#profile-container .no-addresses-text {
+    color: #64748b !important;
+    font-style: italic;
+    font-size: 14px;
+    margin: 10px 0;
+    text-align: left;
+}
+
+.address-sub-note {
+    color: #0284c7 !important;
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+.btn-delete-inline {
+    white-space: nowrap !important;
+    padding: 6px 12px !important;
+    font-size: 0.85rem !important;
+    margin: 0 !important;
+}
+
+.address-form-header {
+    margin-top: 40px !important;
+    border-bottom: 2px solid #f1f5f9 !important;
+    padding-bottom: 10px !important;
+}
+
+.address-form-header h3 {
+    color: #1e293b !important;
+    font-size: 20px !important;
+    text-align: center !important;
+    font-family: Arial, sans-serif !important;
+    margin-bottom: 0 !important;
+}
+
+.address-form-container {
+    margin-top: 20px !important;
+}
+
+.address-form-container input[type="text"] {
+    width: 100% !important;
+    padding: 10px 12px !important;
+    margin-top: 5px !important;
+    margin-bottom: 15px !important;
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 6px !important;
+    color: #0f172a !important;
+    font-size: 14px !important;
+    box-sizing: border-box !important;
+}
+
+.address-form-container input[type="text"]:focus {
+    border-color: #0284c7 !important;
+    background: #ffffff !important;
+    outline: none !important;
+    box-shadow: 0 0 5px rgba(2, 132, 199, 0.2) !important;
+}
+
+.address-form-container label {
+    font-weight: 600 !important;
+    color: #475569 !important;
+    font-size: 13px !important;
+    text-transform: uppercase !important;
+}
+
+.btn-submit-address {
+    width: 100% !important;
+    margin-top: 15px !important;
+}
+
+
+.alert-warning-box {
+    background-color: #fffbeb !important;
+    border: 1px solid #fef3c7 !important;
+    color: #b45309 !important;
+    padding: 12px !important;
+    border-radius: 6px !important;
+    margin-bottom: 20px !important;
+    font-family: Arial, sans-serif !important;
+    font-size: 14px !important;
+    text-align: left !important;
 }
