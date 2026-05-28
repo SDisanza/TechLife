@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login - Tech Life</title>
-    <link type="text/css" rel="stylesheet" href="style.css">
+    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
 </head>
 <body>
 
@@ -16,7 +16,7 @@
     %>
 
     <div class="nav-back">
-        <a href="index.jsp">&larr; Torna alla Home</a>
+        <a href="${pageContext.request.contextPath}/NavigazioneServlet?page=home">&larr; Torna alla Home</a>
     </div>
     
     <div class="login-container-page">
@@ -27,7 +27,7 @@
                 <p class="auth-error-text">Errore d'Autenticazione</p>
             <% } %>
             
-            <form action="LoginServlet" method="post">
+            <form action="${pageContext.request.contextPath}/LoginServlet" method="post">
                 
                 <div class="input-group">
                     <label for="email">Email</label>
@@ -38,7 +38,7 @@
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" required placeholder="••••••••">
                 	<div class="forgot-password-link">
-        				<a href="recupero.jsp">Hai dimenticato la password?</a>
+        				<a href="${pageContext.request.contextPath}/NavigazioneServlet?page=recupero">Hai dimenticato la password?</a>
     				</div>
                 </div>
 

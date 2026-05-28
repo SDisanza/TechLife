@@ -3,7 +3,7 @@
 <%
     UtenteBean utente = (UtenteBean) session.getAttribute("utente");
     if (utente == null) {
-        response.sendRedirect("../login.jsp");
+    	response.sendRedirect(request.getContextPath() + "/NavigazioneServlet?page=login");
         return;
     }
     
@@ -20,12 +20,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Il Mio Profilo - Tech Life</title>
-    <link type="text/css" rel="stylesheet" href="../style.css">
+    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
 </head>
 <body>
 
     <div class="nav-back">
-        <a href="homelogin.jsp">&larr; Torna alla Home</a>
+        <a href="${pageContext.request.contextPath}/NavigazioneServlet?page=homelogin">&larr; Torna alla Home</a>
     </div>
 
     <h1>Il Tuo Profilo</h1>

@@ -29,7 +29,7 @@ public class AutenticazioneFiltro implements Filter {
 	    if (loggato) {
 	        chain.doFilter(request, response);
 	    } else {
-	        httpResponse.sendRedirect(httpRequest.getContextPath() + "/login.jsp");
+	        httpResponse.sendRedirect(httpRequest.getContextPath() + "/NavigazioneServlet?page=login");
 	    }
     }
 

@@ -12,7 +12,7 @@
 		<meta charset="UTF-8">
 		<title>Dove Siamo</title>
 		
-		<link type="text/css" rel="stylesheet" href="style.css">
+		<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
 		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
           integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
           crossorigin=""/>
@@ -24,7 +24,11 @@
 	</head>
 	<body>
 		<div class="nav-back">
-			<a href="index.jsp">&larr; Torna alla Home</a>
+		    <% if (utenteDoveSiamo != null) { %>
+		        <a href="${pageContext.request.contextPath}/NavigazioneServlet?page=homelogin">&larr; Torna alla Home</a>
+		    <% } else { %>
+		        <a href="${pageContext.request.contextPath}/NavigazioneServlet?page=home">&larr; Torna alla Home</a>
+		    <% } %>
 		</div>
 		<h1>Dove Siamo</h1>				
 			<div id="mapcontainer">
@@ -52,6 +56,6 @@
 			    <p id="text"></p>
 			</div>
 		</div>
-		<script src = "script/mappa.js"></script>
+		<script src="${pageContext.request.contextPath}/script/mappa.js"></script>
 	</body>
 </html>

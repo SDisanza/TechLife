@@ -121,7 +121,8 @@ public class LoginServlet extends HttpServlet {
             System.out.println("--- ERRORE CRITICO SQL DURANTE IL LOGIN ---");
             e.printStackTrace();
             request.setAttribute("errorMessage", "Errore di connessione al database.");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/NavigazioneServlet?page=login");
+            return;
         } finally {
             try {
                 if (rs != null) rs.close();

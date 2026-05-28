@@ -4,36 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Recupero Password - Tech Life</title>
-    <link type="text/css" rel="stylesheet" href="style.css">
+    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
 </head>
 <body>
 
     <div class="nav-back">
-        <a href="login.jsp">&larr; Torna al Login</a>
+        <a href="${pageContext.request.contextPath}/NavigazioneServlet?page=login">&larr; Torna al Login</a>
     </div>
     
     <div class="login-container-page">
         <div class="login-card">
             <h2>Recupera Password</h2>
             
-            <%-- MESSAGGI DI ERRORE --%>
+            
             <% if (request.getAttribute("errorMessage") != null) { %>
                 <p class="auth-error-text"><%= request.getAttribute("errorMessage") %></p>
             <% } %>
             
-            <%-- STATO SUCCESSO: SCHERMATA FINALE --%>
+            
             <% if ("success".equals(request.getParameter("status"))) { %>
                 <p class="auth-success-text">🔒 Password aggiornata con successo!</p>
                 <p class="sub-message auth-sub-message">Ora puoi effettuare l'accesso con le tue nuove credenziali.</p>
                 <div class="button-group">
-                    <a href="login.jsp" class="btn-register btn-block text-center-link">Vai al Login</a>
+                    <a href="${pageContext.request.contextPath}/NavigazioneServlet?page=login" class="btn-register btn-block text-center-link">Vai al Login</a>
                 </div>
             
-            <%-- STATO STEP 2: INSERIMENTO NUOVA PASSWORD --%>
+            
             <% } else if (request.getAttribute("emailVerificata") != null) { %>
                 <p class="sub-message auth-sub-message">Email verificata! Inserisci la tua nuova password.</p>
                 
-                <form action="RecuperoPasswordServlet" method="post">
+                <form action="${pageContext.request.contextPath}/RecuperoPasswordServlet" method="post">
                     <input type="hidden" name="azione" value="aggiorna">
                     <input type="hidden" name="email" value="<%= request.getAttribute("emailVerificata") %>">
                     
@@ -55,7 +55,7 @@
             <% } else { %>
                 <p class="sub-message auth-sub-message">Inserisci l'indirizzo email associato al tuo account per avviare il ripristino.</p>
                 
-                <form action="RecuperoPasswordServlet" method="post">
+                <form action="${pageContext.request.contextPath}/RecuperoPasswordServlet" method="post">
                     <input type="hidden" name="azione" value="verificaEmail">
                     
                     <div class="input-group">

@@ -8,7 +8,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession; // Importazione della sessione
+import jakarta.servlet.http.HttpSession;
 import model.UtenteBean;
 import model.UtenteModel;
 
@@ -70,6 +70,7 @@ public class RegistrazioneServlet extends HttpServlet {
                 }
                 
                 model.doSavePrivato(bean);
+                bean = model.doRetrieveByKey(email);
                 System.out.println("DEBUG: Eseguito doSavePrivato con successo!");
                 isRegistrato = true;
                 
@@ -82,6 +83,7 @@ public class RegistrazioneServlet extends HttpServlet {
                 bean.setPec(request.getParameter("pec"));
                 
                 model.doSaveAzienda(bean);
+                bean = model.doRetrieveByKey(email);
                 System.out.println("DEBUG: Eseguito doSaveAzienda con successo!");
                 isRegistrato = true;
                 
@@ -92,7 +94,7 @@ public class RegistrazioneServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "Errore durante la registrazione. Email o Codice Fiscale/P.IVA già esistenti.");
-            request.getRequestDispatcher("WEB-INF/view/registrazione.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/view/registrazione.jsp").forward(request, response);
             return;
         }
 

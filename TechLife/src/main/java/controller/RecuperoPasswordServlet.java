@@ -23,8 +23,7 @@ public class RecuperoPasswordServlet extends HttpServlet {
         String email = request.getParameter("email");
 
         if (azione == null) {
-            response.sendRedirect("recupero.jsp");
-            return;
+        	response.sendRedirect(request.getContextPath() + "/NavigazioneServlet?page=recupero");            return;
         }
 
         Connection connection = null;
@@ -121,8 +120,8 @@ public class RecuperoPasswordServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "Errore del database durante l'elaborazione.");
-            request.getRequestDispatcher("recupero.jsp").forward(request, response);
-        } finally {
+            request.getRequestDispatcher("/WEB-INF/view/recupero.jsp").forward(request, response);
+            } finally {
             // Chiusura sicura e pulita di tutte le connessioni utilizzate
             try {
                 if (rs != null) rs.close();

@@ -10,12 +10,16 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Chi Siamo - Tech Life</title>
-		<link type="text/css" rel="stylesheet" href="style.css">
+		<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
 	</head>
 	<body>
 		
 		<div class="nav-back">
-			<a href="<%= homeDestinazione %>">&larr; Torna alla Home</a>
+		    <% if (utenteChiSiamo != null) { %>
+		        <a href="${pageContext.request.contextPath}/NavigazioneServlet?page=homelogin">&larr; Torna alla Home</a>
+		    <% } else { %>
+		        <a href="${pageContext.request.contextPath}/NavigazioneServlet?page=home">&larr; Torna alla Home</a>
+		    <% } %>
 		</div>
 
 		<h1>La Nostra Missione</h1>

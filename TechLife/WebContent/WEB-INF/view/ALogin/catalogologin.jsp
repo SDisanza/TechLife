@@ -5,14 +5,14 @@
 	<head>
 	    <meta charset="UTF-8">
 	    <title>Catalogo</title>
-	    <link type="text/css" rel="stylesheet" href="../style.css">
+	    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
 	    <%@ page import="model.DriverManagerConnectionPool" %> 
 	</head>
 	<body>
 	
 	<nav class="navbar-top">
 	    <div class="nav-left">
-	        <a href="homelogin.jsp" class="nav-link-home">&larr; Torna alla Home</a>
+	        <a href="${pageContext.request.contextPath}/NavigazioneServlet?page=homelogin" class="nav-link-home">&larr; Torna alla Home</a>
 	    </div>
 	    
 	    <div class="nav-right">
@@ -62,14 +62,14 @@
 		<div class="product-card">
 		    <a href="dettaglioProdotto.jsp?id=<%= id %>" class="product-details-link">
 		   <div class="product-image-wrapper">
-		       <img src="../<%= foto %>" alt="<%= nome %>" class="product-image">
+		       <img src="${pageContext.request.contextPath}/<%= foto %>" alt="<%= nome %>" class="product-image">
 		   </div>
 		   <h3 class="product-title"><%= nome %></h3>
 		   <p class="product-description"><%= descrizione %></p>
 		</a>
 		<div class="product-footer">
 		    <span class="product-price">€ <%= String.format(Locale.US, "%,.2f", prezzo) %></span>
-		   <form action="../AggiungiAlCarrelloServlet" method="POST" class="product-cart-form">
+		   <form action="${pageContext.request.contextPath}/AggiungiAlCarrelloServlet" method="POST" class="product-cart-form">
 		       <input type="hidden" name="id_prodotto" value="<%= id %>">
 		            <input type="hidden" name="quantita" value="1">
 		            <button type="submit" class="btn-cart">Aggiungi</button>

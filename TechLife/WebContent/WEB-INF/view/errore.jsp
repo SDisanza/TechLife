@@ -26,7 +26,7 @@
                 </p>
                 
                 <div class="error-actions">
-                    <a href="${pageContext.request.contextPath}/login.jsp">
+                    <a href="${pageContext.request.contextPath}/NavigazioneServlet?page=login">
                         <button type="button" class="btn-register">
                             Torna al Login
                         </button>

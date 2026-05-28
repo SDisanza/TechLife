@@ -5,11 +5,11 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Registrazione - Tech Life</title>
-		<link type="text/css" rel="stylesheet" href="style.css">
+		<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
 	</head>
 	<body>
 		<div class="nav-back">
-			<a href="index.jsp">&larr; Torna alla Home</a>
+			<a href="${pageContext.request.contextPath}/NavigazioneServlet?page=home">&larr; Torna alla Home</a>
 		</div>
 
 		<h1>Crea il tuo Account</h1>
@@ -27,7 +27,7 @@
 				<% } %>
 			<% } %>
 			
-			<form action="RegistrazioneServlet" method="POST" class="register-card">
+			<form action="${pageContext.request.contextPath}/RegistrazioneServlet" method="POST" class="register-card">
 				<input type="hidden" id="tipo_utente_nascosto" name="tipo_utente" value="privato">
 				
 				<div id="sezione-privato">
@@ -128,12 +128,12 @@
 
 				<button type="submit" class="btn-register">Registrati Ora</button>
 				<div class="form-footer">
-					Hai già un account? <a href="login.jsp">Accedi qui</a>
+					Hai già un account? <a href="${pageContext.request.contextPath}/NavigazioneServlet?page=login">Accedi qui</a>
 				</div>
 			</form>
 		</div>
-		<script src = "script/usage.js"></script>
-		<script src = "script/validation.js"></script>
+		<script src="${pageContext.request.contextPath}/script/usage.js"></script>
+		<script src="${pageContext.request.contextPath}/script/validation.js"></script>
 	</body>
 </html>
     

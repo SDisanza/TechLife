@@ -54,7 +54,7 @@ public class UtenteModel {
 	    } finally {
 	        if (rs != null) rs.close();
 	        if (ps != null) ps.close();
-	        if (connection != null) connection.close();
+	        if (connection != null) DriverManagerConnectionPool.releaseConnection(connection);
 	    }
 	    return null; 
 	}
