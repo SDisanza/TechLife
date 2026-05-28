@@ -17,7 +17,9 @@
 	    
 	    <div class="nav-right">
 	        <a href="carrello.jsp" class="nav-cart-block">
-	            <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="navbar-cart-icon">
+	            <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" 
+	            stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+	            stroke-linejoin="round" class="navbar-cart-icon">
 	                <circle cx="9" cy="21" r="1"></circle>
 	                <circle cx="20" cy="21" r="1"></circle>
 	                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
@@ -67,7 +69,7 @@
 		</a>
 		<div class="product-footer">
 		    <span class="product-price">€ <%= String.format(Locale.US, "%,.2f", prezzo) %></span>
-		   <form action="../AggiungiAlCarrelloServlet" method="POST">
+		   <form action="../AggiungiAlCarrelloServlet" method="POST" class="product-cart-form">
 		       <input type="hidden" name="id_prodotto" value="<%= id %>">
 		            <input type="hidden" name="quantita" value="1">
 		            <button type="submit" class="btn-cart">Aggiungi</button>

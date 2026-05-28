@@ -549,6 +549,51 @@ body {
   margin-top: 20px;
 }
 
+.forgot-password-link {
+    width: 100%;
+    text-align: right;
+    margin-top: 5px;
+}
+
+.forgot-password-link a {
+    color: #33a1ff;
+    font-size: 0.85rem;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    transition: color 0.2s ease;
+}
+
+.forgot-password-link a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.sub-message.auth-sub-message {
+    text-align: center !important;
+    margin-bottom: 20px !important;
+}
+
+
+.auth-success-text {
+    color: #22c55e !important;
+    text-align: center !important;
+    font-weight: 600;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.btn-block {
+    width: 100% !important;
+    box-sizing: border-box;
+}
+
+.text-center-link {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    line-height: 2.5; 
+}
+
 /* =======================
    5. PAGINA REGISTRAZIONE 
    ======================= */

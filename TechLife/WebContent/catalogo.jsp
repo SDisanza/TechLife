@@ -71,7 +71,7 @@
 		</a>
 		<div class="product-footer">
 		    <span class="product-price">€ <%= String.format(Locale.US, "%,.2f", prezzo) %></span>
-		   <form action="AggiungiAlCarrelloServlet" method="POST">
+		   <form action="AggiungiAlCarrelloServlet" method="POST" class="product-cart-form">
 		       <input type="hidden" name="id_prodotto" value="<%= id %>">
 		            <input type="hidden" name="quantita" value="1">
 		            <button type="submit" class="btn-cart">Aggiungi</button>
