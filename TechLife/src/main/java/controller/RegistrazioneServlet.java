@@ -92,7 +92,7 @@ public class RegistrazioneServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "Errore durante la registrazione. Email o Codice Fiscale/P.IVA già esistenti.");
-            request.getRequestDispatcher("registrazione.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/view/registrazione.jsp").forward(request, response);
             return;
         }
 
@@ -108,7 +108,7 @@ public class RegistrazioneServlet extends HttpServlet {
             System.out.println("DEBUG: Reindirizzamento a /ALogin/homelogin.jsp");
             
 
-            response.sendRedirect(request.getContextPath() + "/ALogin/homelogin.jsp");
+            request.getRequestDispatcher("/WEB-INF/view/ALogin/homelogin.jsp").forward(request, response);
         } else {
             response.sendRedirect("registrazione.jsp");
         }
@@ -116,6 +116,6 @@ public class RegistrazioneServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("registrazione.jsp");
+    	request.getRequestDispatcher("/WEB-INF/view/registrazione.jsp").forward(request, response);
     }
 }

@@ -104,17 +104,17 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("tipo", isAziendaUser ? "azienda" : "privato");
 
                     System.out.println("DEBUG LOGIN: Login autorizzato con successo per " + email + " | Tipo: " + (isAziendaUser ? "azienda" : "privato"));
-                    response.sendRedirect("ALogin/homelogin.jsp");
+                    request.getRequestDispatcher("/WEB-INF/view/ALogin/homelogin.jsp").forward(request, response);
                     return;
                 } else {
                     System.out.println("DEBUG LOGIN: La password non coincide per " + email);
                     request.setAttribute("errorMessage", "Password errata.");
-                    request.getRequestDispatcher("login.jsp").forward(request, response);
+                    request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
                 }
             } else {
                 System.out.println("DEBUG LOGIN: Nessun utente trovato con questa email.");
                 request.setAttribute("errorMessage", "Utente non trovato.");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
             }
 
         } catch (SQLException e) {
@@ -135,7 +135,7 @@ public class LoginServlet extends HttpServlet {
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("login.jsp");
+    	request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
     }
 
     public static String hashPassword(String password) {

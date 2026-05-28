@@ -37,9 +37,6 @@ public class GestioneSpedizioneServlet extends HttpServlet {
         try {
             System.out.println("DEBUG SPEDIZIONE: Ricevuta azione = '" + azione + "' | Tipo utente = '" + tipoUtente + "'");
 
-            // ====================================================================
-            // 1. CASO: AGGIUNTA NUOVO INDIRIZZO
-            // ====================================================================
             if ("aggiungi".equals(azione) || azione == null || azione.isEmpty()) {
                 
                 String indirizzoSpedizione = request.getParameter("indirizzo_spedizione");
@@ -48,7 +45,8 @@ public class GestioneSpedizioneServlet extends HttpServlet {
                 if (model.checkIndirizzoEsistente(utenteLoggato.getId(), indirizzoSpedizione, tipoUtente)) {
                     System.out.println("DEBUG SPEDIZIONE: Indirizzo già presente nel DB. Salto l'inserimento.");
                     // Reindirizza alla pagina utente passando un parametro di avviso per la grafica (opzionale)
-                    response.sendRedirect(request.getContextPath() + "/ALogin/utente.jsp?status=duplicato");
+                    request.setAttribute("status", "duplicato");
+                    request.getRequestDispatcher("/WEB-INF/view/ALogin/utente.jsp").forward(request, response);
                     return;
                 }
 
@@ -84,9 +82,6 @@ public class GestioneSpedizioneServlet extends HttpServlet {
                     System.out.println("ERROR DEBUG: Il tipo utente '" + tipoUtente + "' non è valido.");
                 }
 
-            // ====================================================================
-            // 2. CASO: RIMOZIONE INDIRIZZO (Risolve l'Errore 500)
-            // ====================================================================
             } else if ("rimuovi".equals(azione)) {
                 String idSpedizioneStr = request.getParameter("id_spedizione");
                 
@@ -108,16 +103,16 @@ public class GestioneSpedizioneServlet extends HttpServlet {
             e.printStackTrace(); 
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             request.setAttribute("jakarta.servlet.error.status_code", 500);
-            request.getRequestDispatcher("/errore.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/view/errore.jsp").forward(request, response);
             return;
         }
 
         // Ritorna sempre alla pagina utente aggiornata
-        response.sendRedirect(request.getContextPath() + "/ALogin/utente.jsp");
+        request.getRequestDispatcher("/WEB-INF/view/ALogin/utente.jsp").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect(request.getContextPath() + "/ALogin/utente.jsp");
+        request.getRequestDispatcher("/WEB-INF/view/ALogin/utente.jsp").forward(request, response);
     }
 }

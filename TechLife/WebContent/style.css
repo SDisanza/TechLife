@@ -1274,3 +1274,17 @@ body {
     font-size: 14px !important;
     text-align: left !important;
 }
+
+/* ====================
+   11. VALIDAZIONE DATI
+   ==================== */
+.error-message-js {
+    color: #ff4444 !important;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    margin-bottom: 0;
+    font-family: Arial, sans-serif;
+    font-weight: 500;
+    text-align: left;
+    width: 100%;
+}

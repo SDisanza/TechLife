@@ -133,6 +133,7 @@
 			</form>
 		</div>
 		<script src = "script/usage.js"></script>
+		<script src = "script/validation.js"></script>
 	</body>
 </html>
     

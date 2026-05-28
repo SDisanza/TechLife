@@ -34,13 +34,10 @@ public class RecuperoPasswordServlet extends HttpServlet {
         try {
             connection = DriverManagerConnectionPool.getConnection();
 
-            // ====================================================================
-            // STEP 1: VERIFICA SE L'EMAIL ESISTE E IDENTIFICA LA TIPOLOGIA ACCOUNT
-            // ====================================================================
             if ("verificaEmail".equals(azione)) {
                 if (email == null || email.trim().isEmpty()) {
                     request.setAttribute("errorMessage", "Il campo email è obbligatorio.");
-                    request.getRequestDispatcher("recupero.jsp").forward(request, response);
+                    request.getRequestDispatcher("/WEB-INF/view/recupero.jsp").forward(request, response);
                     return;
                 }
 
@@ -53,7 +50,7 @@ public class RecuperoPasswordServlet extends HttpServlet {
                 if (rs.next()) {
                     request.setAttribute("emailVerificata", email);
                     request.setAttribute("tipoUtente", "privato");
-                    request.getRequestDispatcher("recupero.jsp").forward(request, response);
+                    request.getRequestDispatcher("/WEB-INF/view/recupero.jsp").forward(request, response);
                     return;
                 }
                 
@@ -70,16 +67,13 @@ public class RecuperoPasswordServlet extends HttpServlet {
                 if (rs.next()) {
                     request.setAttribute("emailVerificata", email);
                     request.setAttribute("tipoUtente", "azienda");
-                    request.getRequestDispatcher("recupero.jsp").forward(request, response);
+                    request.getRequestDispatcher("/WEB-INF/view/recupero.jsp").forward(request, response);
                 } else {
                     request.setAttribute("errorMessage", "Nessun account associato a questo indirizzo email.");
-                    request.getRequestDispatcher("recupero.jsp").forward(request, response);
+                    request.getRequestDispatcher("/WEB-INF/view/recupero.jsp").forward(request, response);
                 }
             }
             
-            // ====================================================================
-            // STEP 2: VALIDAZIONE ED ESECUZIONE DEL RESET DELLA PASSWORD
-            // ====================================================================
             else if ("aggiorna".equals(azione)) {
                 String nuovaPassword = request.getParameter("nuovaPassword");
                 String confermaPassword = request.getParameter("confermaPassword");
@@ -89,7 +83,7 @@ public class RecuperoPasswordServlet extends HttpServlet {
                     request.setAttribute("errorMessage", "Entrambi i campi password sono obbligatori.");
                     request.setAttribute("emailVerificata", email);
                     request.setAttribute("tipoUtente", tipoUtente);
-                    request.getRequestDispatcher("recupero.jsp").forward(request, response);
+                    request.getRequestDispatcher("/WEB-INF/view/recupero.jsp").forward(request, response);
                     return;
                 }
 
@@ -97,15 +91,13 @@ public class RecuperoPasswordServlet extends HttpServlet {
                     request.setAttribute("errorMessage", "Le password inserite non corrispondono.");
                     request.setAttribute("emailVerificata", email);
                     request.setAttribute("tipoUtente", tipoUtente);
-                    request.getRequestDispatcher("recupero.jsp").forward(request, response);
+                    request.getRequestDispatcher("/WEB-INF/view/recupero.jsp").forward(request, response);
                     return;
                 }
 
-                // VALORE AGGIUNTO (PILASTRO 1): Riutilizzo del metodo di hashing centralizzato in LoginServlet
                 String passwordCriptata = controller.LoginServlet.hashPassword(nuovaPassword);
                 String updateQuery = "";
 
-                // Selezione mirata della tabella corretta in base all'esito dello Step 1
                 if ("azienda".equals(tipoUtente)) {
                     updateQuery = "UPDATE AnagraficaPIVA SET Password = ? WHERE Email = ?";
                 } else {
@@ -122,8 +114,8 @@ public class RecuperoPasswordServlet extends HttpServlet {
                     connection.commit();
                 }
 
-                // Reset completato con successo
-                response.sendRedirect("recupero.jsp?status=success");
+                request.setAttribute("status", "success");
+                request.getRequestDispatcher("/WEB-INF/view/recupero.jsp").forward(request, response);
             }
 
         } catch (SQLException e) {
@@ -144,6 +136,6 @@ public class RecuperoPasswordServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-        response.sendRedirect("recupero.jsp");
+    	request.getRequestDispatcher("/WEB-INF/view/recupero.jsp").forward(request, response);
     }
 }
