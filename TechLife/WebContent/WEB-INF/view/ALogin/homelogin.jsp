@@ -26,13 +26,13 @@
 		
 		<div class="logout-container">
 		    <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn-logout">Logout</a>
-		        <i class="fas fa-sign-out-alt"></i> Esci / Logout
+		        <i class="fas fa-sign-out-alt"></i>
 		    </a>
 		</div>
 		<div id="container">
 		
 			<div class="divHome">
-				<a href="${pageContext.request.contextPath}/NavigazioneServlet?page="profilo">
+				<a href="${pageContext.request.contextPath}/NavigazioneServlet?page=profilo">
 				<img src="${pageContext.request.contextPath}/img/index/profiloblu.png" alt="Profilo">
 				<span>Utente</span></a>
 			</div>

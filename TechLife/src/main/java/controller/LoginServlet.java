@@ -143,10 +143,14 @@ public class LoginServlet extends HttpServlet {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(password.getBytes());
-            // Utilizzo di Base64 per allinearsi perfettamente al database esistente
             return java.util.Base64.getEncoder().encodeToString(hash);
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
+    }
+    public static boolean isPasswordSicura(String password) {
+        if (password == null) return false;
+        String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[.,@$!%*?&!#_])[A-Za-z\\d.,@$!%*?&!#_]{8,}$";
+        return password.matches(regex);
     }
 }

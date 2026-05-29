@@ -1288,3 +1288,25 @@ body {
     text-align: left;
     width: 100%;
 }
+
+#box-requisiti-password {
+    margin-top: 8px;
+    font-size: 0.85em;
+    line-height: 1.5;
+}
+
+#box-requisiti-password .titolo-requisiti {
+    margin: 0 0 5px 0;
+    font-weight: bold;
+    color: #555;
+}
+
+.requisito-invalido {
+    color: #dc3545;
+    font-weight: 500;
+}
+
+.requisito-valido {
+    color: #28a745;
+    font-weight: 500;
+}

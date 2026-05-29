@@ -25,7 +25,12 @@ public class RegistrazioneServlet extends HttpServlet {
         String tipoUtente = request.getParameter("tipo_utente");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        
+
+        if (!LoginServlet.isPasswordSicura(password)) {
+            request.setAttribute("errorMessage", "La password non rispetta i requisiti di sicurezza (minimo 8 caratteri, una maiuscola, una minuscola, un numero e un carattere speciale).");
+            request.getRequestDispatcher("/WEB-INF/view/registrazione.jsp").forward(request, response);
+            return;
+        }        
 
         String passwordCifrata = LoginServlet.hashPassword(password);
         

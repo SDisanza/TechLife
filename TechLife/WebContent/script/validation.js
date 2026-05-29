@@ -1,15 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.querySelector(".register-card");
-    const btnSubmit = form.querySelector(".btn-register");
-    
     if (!form) return;
+    const btnSubmit = form.querySelector(".btn-register");
 
     const regexFormati = {
         email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
         cf: /^[A-Z]{6}[0-9]{2}[A-Z]{1}[0-9]{2}[A-Z]{1}[0-9]{3}[A-Z]{1}$/i,
         p_iva: /^[0-9]{11}$/
     };
-
 
     function convalidaAsincrona(inputElement, tipoControllo, messaggioDuplicato, messaggioFormatoErrato) {
         inputElement.addEventListener("blur", function () {
@@ -33,7 +31,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 return; 
             }
 
-
             fetch("ValidaAjaxServlet", {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -44,7 +41,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (data.esiste) {
                     mostraErrore(inputElement, messaggioDuplicato);
                 }
-
                 aggiornaStatoBottone();
             })
             .catch(error => {
@@ -53,7 +49,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
     }
-
 
     if (document.getElementById("email")) {
         convalidaAsincrona(document.getElementById("email"), "email", "Questa email è già registrata.", "Formato email non valido (es. nome@dominio.it).");
@@ -75,7 +70,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-
     function aggiornaStatoBottone() {
         const numeroErrori = document.querySelectorAll(".error-message-js").length;
         if (numeroErrori > 0) {
@@ -89,7 +83,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-
     form.addEventListener("submit", function (event) {
         const numeroErrori = document.querySelectorAll(".error-message-js").length;
         if (numeroErrori > 0) {
@@ -98,3 +91,57 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+function validaCoincidenzaPassword() {
+    validaPasswordRealTime();
+    
+    const passwordInput = document.getElementById("password");
+    const confermaInput = document.getElementById("confermaPassword");
+
+    if (passwordInput && confermaInput) {
+        const password = passwordInput.value;
+        const conferma = confermaInput.value;
+        
+        console.log("JS-DEBUG: Controllo uguaglianza -> ", password === conferma);
+
+        if (password !== conferma && conferma.length > 0) {
+            confermaInput.setCustomValidity("Le password non coincidono!");
+        } else {
+            confermaInput.setCustomValidity("");
+        }
+    }
+}
+
+function validaPasswordRealTime() {
+    const passwordInput = document.getElementById("password");
+    if (!passwordInput) return;
+
+    let password = passwordInput.value;
+    let requisiti = {
+        lunghezza: password.length >= 8,
+        maiuscola: /[A-Z]/.test(password),
+        minuscola: /[a-z]/.test(password),
+        numero: /\d/.test(password),
+        speciale: /[.,@$!%*?&!#_]/.test(password)
+    };
+
+    for (let chiave in requisiti) {
+        let elemento = document.getElementById("req-" + chiave);
+        if (elemento) {
+            if (requisiti[chiave]) {
+                elemento.className = "requisito-valido";
+                elemento.innerHTML = " ✓ " + elemento.getAttribute("data-testo");
+            } else {
+                elemento.className = "requisito-invalido";
+                elemento.innerHTML = " ❌ " + elemento.getAttribute("data-testo");
+            }
+        }
+    }
+    
+    let passwordValida = requisiti.lunghezza && requisiti.maiuscola && requisiti.minuscola && requisiti.numero && requisiti.speciale;
+    if (!passwordValida && password.length > 0) {
+        passwordInput.setCustomValidity("La password non rispetta tutti i requisiti.");
+    } else {
+        passwordInput.setCustomValidity("");
+    }
+}

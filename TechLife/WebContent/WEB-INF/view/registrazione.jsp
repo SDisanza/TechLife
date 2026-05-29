@@ -6,6 +6,7 @@
 		<meta charset="UTF-8">
 		<title>Registrazione - Tech Life</title>
 		<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
+		<script src="${pageContext.request.contextPath}/script/validation.js"></script>
 	</head>
 	<body>
 		<div class="nav-back">
@@ -121,9 +122,18 @@
 						<button type="button" id="btn-generate" onclick="generaPasswordSicura()">Suggerisci password</button>
 					</div>
 					<div class="password-input-wrapper">
-						<input type="password" id="password" name="password" placeholder="Crea la tua password" autocomplete="new-password" required>
+						<input type="password" id="password" name="password" oninput="validaPasswordRealTime()"
+       					placeholder="Inserisci password sicura" autocomplete="new-password" required>
 						<button type="button" id="btn-toggle-password" onclick="togglePasswordVisibilita()">👁️</button>
 					</div>
+					<div id="box-requisiti-password">
+				        <p class="titolo-requisiti">La password deve contenere:</p>
+				        <div id="req-lunghezza" class="requisito-invalido" data-testo="Almeno 8 caratteri"> ❌ Almeno 8 caratteri</div>
+				        <div id="req-maiuscola" class="requisito-invalido" data-testo="Una lettera maiuscola"> ❌ Una lettera maiuscola</div>
+				        <div id="req-minuscola" class="requisito-invalido" data-testo="Una lettera minuscola"> ❌ Una lettera minuscola</div>
+				        <div id="req-numero" class="requisito-invalido" data-testo="Un numero"> ❌ Un numero</div>
+				        <div id="req-speciale" class="requisito-invalido" data-testo="Un carattere speciale (@$!%*?&!#_)"> ❌ Un carattere speciale (@$!%*?&!#_)</div>
+				    </div>
 				</div>
 
 				<button type="submit" class="btn-register">Registrati Ora</button>
@@ -133,7 +143,6 @@
 			</form>
 		</div>
 		<script src="${pageContext.request.contextPath}/script/usage.js"></script>
-		<script src="${pageContext.request.contextPath}/script/validation.js"></script>
 	</body>
 </html>
     
