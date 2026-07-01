@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*, java.util.*" %>
+<%@ page import = " model.Carrello " %>
 <!DOCTYPE html>
 <html lang="it">
 	<head>
@@ -10,13 +11,22 @@
 	</head>
 	<body>
 	
+	<%
+        // Recuperiamo dinamicamente il numero di elementi per il badge
+        int badgeCount = 0;
+        Carrello cartOspite = (session != null) ? (Carrello) session.getAttribute("carrello") : null;
+        if (cartOspite != null) {
+            badgeCount = cartOspite.getQuantitaTotale();
+        }
+    %>
+	
 	<nav class="navbar-top">
 	    <div class="nav-left">
 	        <a href="${pageContext.request.contextPath}/NavigazioneServlet?page=homelogin" class="nav-link-home">&larr; Torna alla Home</a>
 	    </div>
 	    
 	    <div class="nav-right">
-	        <a href="carrello.jsp" class="nav-cart-block">
+	        <a href="${pageContext.request.contextPath}/NavigazioneServlet?page=carrello" class="nav-cart-block">
 	            <svg xmlns="http://w3.org" viewBox="0 0 24 24" fill="none" 
 	            stroke="currentColor" stroke-width="2" stroke-linecap="round" 
 	            stroke-linejoin="round" class="navbar-cart-icon">
@@ -25,7 +35,7 @@
 	                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
 	            </svg>
 	            <span class="cart-label">Carrello</span>
-	            <span class="cart-badge">0</span>
+	            <span class="cart-badge"><%= badgeCount %></span>
 	        </a>
 	    </div>
 	</nav>
@@ -69,9 +79,9 @@
 		</a>
 		<div class="product-footer">
 		    <span class="product-price">€ <%= String.format(Locale.US, "%,.2f", prezzo) %></span>
-		   <form action="${pageContext.request.contextPath}/AggiungiAlCarrelloServlet" method="POST" class="product-cart-form">
-		       <input type="hidden" name="id_prodotto" value="<%= id %>">
-		            <input type="hidden" name="quantita" value="1">
+		   <form action="${pageContext.request.contextPath}/CarrelloServlet" method="POST" class="product-cart-form">
+		       <input type="hidden" name="idProdotto" value="<%= id %>">
+		            <input type="hidden" name="azione" value="aggiungi">
 		            <button type="submit" class="btn-cart">Aggiungi</button>
 		        </form>
 		    </div>

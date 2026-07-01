@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/NavigazioneServlet")
 public class NavigazioneServlet extends HttpServlet {
@@ -43,6 +44,39 @@ public class NavigazioneServlet extends HttpServlet {
                 break;
             case "dovesiamo":
                 request.getRequestDispatcher("/WEB-INF/view/dove siamo.jsp").forward(request, response);
+                break;
+            case "carrello":
+                    request.getRequestDispatcher("/WEB-INF/view/carrello.jsp").forward(request, response);
+                break;
+            case "checkout":
+                HttpSession sessionCheckout = request.getSession();
+                model.UtenteBean utenteLoggato = (model.UtenteBean) sessionCheckout.getAttribute("utente");
+                
+                if (utenteLoggato == null) {
+                    request.setAttribute("errorMessage", "Effettua l'accesso per poter procedere al checkout.");
+                    request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
+                    return;
+                }
+                
+                model.SpedizioneModel spedizioneModel = new model.SpedizioneModel();
+                String tipoUtente = (String) sessionCheckout.getAttribute("tipo");
+                
+                try {
+                    java.util.Collection<model.SpedizioneBean> listaIndirizzi;
+                    if ("azienda".equals(tipoUtente)) {
+                        listaIndirizzi = spedizioneModel.getIndirizziAzienda(utenteLoggato.getId());
+                    } else {
+                        listaIndirizzi = spedizioneModel.getIndirizziPrivato(utenteLoggato.getId());
+                    }
+                    
+                    request.setAttribute("listaIndirizzi", listaIndirizzi);
+                    
+                } catch (java.sql.SQLException e) {
+                    e.printStackTrace();
+                    System.out.println("DEBUG CHECKOUT: Errore nel recupero degli indirizzi di spedizione.");
+                }
+                
+                request.getRequestDispatcher("/WEB-INF/view/checkout.jsp").forward(request, response);
                 break;
                 
             // Pagine dell'area riservata (sotto il controllo del filtro)
