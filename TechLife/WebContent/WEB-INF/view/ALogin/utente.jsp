@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="model.SpedizioneModel, model.SpedizioneBean, model.UtenteBean, java.util.Collection" %>
+<%@ page import="model.SpedizioneModel, model.OrdineBean, model.SpedizioneBean, model.UtenteBean, java.text.SimpleDateFormat, java.util.Locale, java.util.Collection" %>
 <%
     UtenteBean utente = (UtenteBean) session.getAttribute("utente");
     if (utente == null) {
@@ -174,6 +174,50 @@
             <button type="submit" class="btn-register btn-submit-address">Salva Indirizzo</button>
         </form>
     </div>
+
+	<div class="checkout-page-container" style="margin-top: 40px;">
+	    <h2>Storico dei tuoi Ordini & Fatture</h2>
+	    
+	    <%
+	        Collection<OrdineBean> storicoOrdini = (Collection<OrdineBean>) request.getAttribute("storicoOrdini");
+	        if (storicoOrdini == null || storicoOrdini.isEmpty()) {
+	    %>
+	        <p class="cart-prod-cat">Non hai ancora effettuato nessun ordine su TechLife.</p>
+	    <%
+	        } else {
+	    %>
+	        <table class="invoice-table">
+	            <thead>
+	                <tr>
+	                    <th>ID Ordine</th>
+	                    <th>Data Acquisto</th>
+	                    <th>Totale Corrisposto</th>
+	                    <th>Fattura</th>
+	                </tr>
+	            </thead>
+	            <tbody>
+	                <% 
+	                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+	                    for (OrdineBean ord : storicoOrdini) { 
+	                %>
+	                    <tr>
+	                        <td><strong>#<%= ord.getId() %></strong></td>
+	                        <td><%= sdf.format(ord.getDataOrdine()) %></td>
+	                        <td class="final-price">
+	                            <%-- Utilizziamo il getter del tuo nuovo OrdineBean --%>
+	                            € <%= String.format(Locale.US, "%,.2f", ord.getTotaleOrdine()) %>
+	                        </td>
+	                        <td>
+	                            <a href="${pageContext.request.contextPath}/NavigazioneServlet?page=vediFattura&id=<%= ord.getId() %>" class="no-print-btn" style="padding: 6px 12px; font-size: 0.85em; text-decoration: none; margin: 0;">Vedi Fattura</a>
+	                        </td>
+	                    </tr>
+	                <% } %>
+	            </tbody>
+	        </table>
+	    <%
+	        }
+	    %>
+	</div>
 
     <div class="logout-container" style="margin-top: 30px; margin-bottom: 50px;">
         <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn-logout" style="padding: 10px 25px;">Disconnetti</a>

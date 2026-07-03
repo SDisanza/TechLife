@@ -84,7 +84,7 @@ public class LoginServlet extends HttpServlet {
                     user.setEmail(rs.getString("Email"));
                     user.setPwd(rs.getString("Password"));
                     user.setNome(rs.getString("NomeAzienda"));
-                    user.setCognome("Azienda / P.IVA"); // Mantiene il trucco per la logica grafica di utente.jsp
+                    user.setCognome("Azienda / P.IVA");
                     user.setcodiceFiscale(rs.getString("Partita_IVA"));
                     user.setComune(rs.getString("Comune_Legale"));
                     user.setIndirizzo(rs.getString("Indirizzo_Legale"));
@@ -102,6 +102,19 @@ public class LoginServlet extends HttpServlet {
                     HttpSession session = request.getSession(true);
                     session.setAttribute("utente", user);
                     session.setAttribute("tipo", isAziendaUser ? "azienda" : "privato");
+                    
+                    try {
+                        model.CarrelloModel carrelloModel = new model.CarrelloModel();
+                        // Recuperiamo il carrello nel DB
+                        model.Carrello carrelloSalvato = carrelloModel.recuperaCarrello(user.getId());
+                        session.setAttribute("carrello", carrelloSalvato);
+                        System.out.println("DEBUG LOGIN DB: Carrello ripristinato dal DB per l'utente ID #" + user.getId());
+                    } catch (java.sql.SQLException e) {
+                        System.out.println("DEBUG LOGIN DB: Errore nel ripristino del carrello dal DB. Creo un carrello vuoto.");
+                        e.printStackTrace();
+                        // Se errore allora nuovo carrello
+                        session.setAttribute("carrello", new model.Carrello());
+                    }
 
                     System.out.println("DEBUG LOGIN: Login autorizzato con successo per " + email + " | Tipo: " + (isAziendaUser ? "azienda" : "privato"));
                     request.getRequestDispatcher("/WEB-INF/view/ALogin/homelogin.jsp").forward(request, response);

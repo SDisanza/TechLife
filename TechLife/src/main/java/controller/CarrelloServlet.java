@@ -39,7 +39,7 @@ public class CarrelloServlet extends HttpServlet {
             if ("aggiungi".equals(azione)) {
                 if (idString != null) {
                     int id = Integer.parseInt(idString);
-                    // Peschiamo il prodotto aggiornato dal DB
+                    // Prendiamo il prodotto aggiornato dal DB
                     ProdottoBean prodotto = model.doRetrieveByKey(id);
                     if (prodotto != null) {
                         carrello.aggiungiProdotto(prodotto, 1);
@@ -64,9 +64,9 @@ public class CarrelloServlet extends HttpServlet {
                 if (idString != null && quantitaString != null) {
                     int id = Integer.parseInt(idString);
                     int nuovaQuantita = Integer.parseInt(quantitaString);
-                    ProdottoBean prodotto = model.doRetrieveByKey(id);
-                    if (prodotto != null) {
-                        carrello.aggiornaQuantita(prodotto, nuovaQuantita);
+                    ProdottoBean producto = model.doRetrieveByKey(id);
+                    if (producto != null) {
+                        carrello.aggiornaQuantita(producto, nuovaQuantita);
                         System.out.println("DEBUG CARRELLO: Quantità aggiornata a " + nuovaQuantita);
                     }
                 }
@@ -76,12 +76,23 @@ public class CarrelloServlet extends HttpServlet {
                 carrello.svuota();
                 System.out.println("DEBUG CARRELLO: Carrello svuotato.");
             }
+            //Qualsiasi operazione si faccia si sincronizza il DB
+            model.UtenteBean utenteLoggato = (model.UtenteBean) session.getAttribute("utente");
+            if (utenteLoggato != null) {
+                try {
+                    model.CarrelloModel carrelloModel = new model.CarrelloModel();
+                    carrelloModel.salvaCarrello(utenteLoggato.getId(), carrello);
+                    System.out.println("DEBUG CARRELLO DB: Carrello salvato su database per utente #" + utenteLoggato.getId());
+                } catch (java.sql.SQLException e) {
+                    System.out.println("DEBUG CARRELLO DB: Errore durante il salvataggio su database.");
+                    e.printStackTrace();
+                }
+            }
 
         } catch (SQLException | NumberFormatException e) {
             e.printStackTrace();
         }
 
-        // Dopo aver fatto l'azione, rimandiamo l'utente alla pagina del carrello
         response.sendRedirect(request.getContextPath() + "/NavigazioneServlet?page=carrello");
     }
 

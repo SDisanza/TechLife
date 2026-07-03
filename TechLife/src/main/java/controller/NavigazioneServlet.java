@@ -17,7 +17,6 @@ public class NavigazioneServlet extends HttpServlet {
         
         String pagina = request.getParameter("page");
         
-        // Se l'utente non specifica la pagina, lo mandiamo alla Index (Home pubblica)
         if (pagina == null || pagina.isEmpty()) {
             request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request, response);
             return;
@@ -87,9 +86,105 @@ public class NavigazioneServlet extends HttpServlet {
                 request.getRequestDispatcher("/WEB-INF/view/ALogin/catalogologin.jsp").forward(request, response);
                 break;
             case "profilo":
+            case "utente":
+                HttpSession sessionProfilo = request.getSession();
+                model.UtenteBean ut = (model.UtenteBean) sessionProfilo.getAttribute("utente");
+                
+                if (ut != null) {
+                    try {
+                        model.OrdineModel ordineModel = new model.OrdineModel();
+                        java.util.Collection<model.OrdineBean> storicoOrdini = ordineModel.doRetrieveByCliente(ut.getId());
+                        request.setAttribute("storicoOrdini", storicoOrdini);
+                    } catch (java.sql.SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
                 request.getRequestDispatcher("/WEB-INF/view/ALogin/utente.jsp").forward(request, response);
                 break;
-                
+
+            case "vediFattura":
+                HttpSession sessionFattura = request.getSession();
+                model.UtenteBean utenteFattura = (model.UtenteBean) sessionFattura.getAttribute("utente");
+                String idOrdString = request.getParameter("id");
+
+                if (utenteFattura == null || idOrdString == null) {
+                    request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
+                    return;
+                }
+
+                try {
+                    int idOrdine = Integer.parseInt(idOrdString);
+                    model.OrdineModel oModel = new model.OrdineModel();
+                    model.OrdineBean ordine = oModel.doRetrieveByKey(idOrdine);
+
+                    // Controllo di sicurezza: l'ordine deve appartenere all'utente loggato
+                    if (ordine != null && ordine.getIdCliente() == utenteFattura.getId()) {
+                        
+                        // 1. Settaggio ContentType
+                        response.setContentType("application/pdf");
+                        response.setHeader("Content-Disposition", "attachment; filename=Fattura_TechLife_Order_" + ordine.getId() + ".pdf");
+
+                        // 2. Creazione documento
+                        com.lowagie.text.Document document = new com.lowagie.text.Document();
+                        com.lowagie.text.pdf.PdfWriter.getInstance(document, response.getOutputStream());
+
+                        // 3. Apertura del documento
+                        document.open();
+
+                        com.lowagie.text.Paragraph intestazione = new com.lowagie.text.Paragraph();
+                        intestazione.add("TechLife S.r.l.\n");
+                        intestazione.add("Via dell'Innovazione, 42 - 84044 Battipaglia (SA)\n");
+                        intestazione.add("P.IVA: 01234567890\n\n");
+                        document.add(intestazione);
+
+                        com.lowagie.text.Paragraph titolo = new com.lowagie.text.Paragraph(
+                            "FATTURA ORDINE", 
+                            com.lowagie.text.FontFactory.getFont(com.lowagie.text.FontFactory.HELVETICA_BOLD, 18)
+                        );
+                        titolo.setAlignment(com.lowagie.text.Element.ALIGN_CENTER);
+                        document.add(titolo);
+                        document.add(new com.lowagie.text.Paragraph("\n"));
+
+                        java.text.SimpleDateFormat sdfPdf = new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm");
+                        com.lowagie.text.Paragraph dettagli = new com.lowagie.text.Paragraph();
+                        dettagli.add("Fattura Numero: FT-" + ordine.getId() * 123 + "\n");
+                        dettagli.add("Data Emissione: " + sdfPdf.format(ordine.getDataOrdine()) + "\n");
+                        dettagli.add("Intestatario: " + utenteFattura.getNome() + " " + utenteFattura.getCognome() + "\n");
+                        dettagli.add("Identificativo Fiscale: " + utenteFattura.getcodiceFiscale() + "\n");
+                        dettagli.add("Stato Pagamento: Corrisposto\n\n");
+                        document.add(dettagli);
+
+                        com.lowagie.text.pdf.PdfPTable table = new com.lowagie.text.pdf.PdfPTable(3);
+                        table.setWidthPercentage(100);
+                        
+                        table.addCell("Descrizione Hardware/Servizio");
+                        table.addCell("Quantità");
+                        table.addCell("Prezzo Totale");
+
+                        table.addCell("Fornitura ed evasione Dispositivi TechLife - Ordine #" + ordine.getId());
+                        table.addCell("1");
+                        table.addCell("EUR " + String.format(java.util.Locale.US, "%,.2f", ordine.getTotaleOrdine()));
+                        document.add(table);
+
+                        document.add(new com.lowagie.text.Paragraph("\n"));
+
+                        com.lowagie.text.Paragraph totaleBlock = new com.lowagie.text.Paragraph(
+                            "TOTALE COMPLESSIVO: EUR " + String.format(java.util.Locale.US, "%,.2f", ordine.getTotaleOrdine()),
+                            com.lowagie.text.FontFactory.getFont(com.lowagie.text.FontFactory.HELVETICA_BOLD, 14)
+                        );
+                        totaleBlock.setAlignment(com.lowagie.text.Element.ALIGN_RIGHT);
+                        document.add(totaleBlock);
+
+                        // 4. Chiudiamo il documento
+                        document.close();
+                        return;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                request.getRequestDispatcher("/WEB-INF/view/errore.jsp").forward(request, response);
+                break;
+
             default:
                 request.getRequestDispatcher("/WEB-INF/view/errore.jsp").forward(request, response);
                 break;
