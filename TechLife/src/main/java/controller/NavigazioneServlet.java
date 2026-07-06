@@ -57,7 +57,7 @@ public class NavigazioneServlet extends HttpServlet {
                     return;
                 }
                 
-                model.SpedizioneModel spedizioneModel = new model.SpedizioneModel();
+                dao.SpedizioneDAO spedizioneModel = new dao.SpedizioneDAO();
                 String tipoUtente = (String) sessionCheckout.getAttribute("tipo");
                 
                 try {
@@ -92,7 +92,7 @@ public class NavigazioneServlet extends HttpServlet {
                 
                 if (ut != null) {
                     try {
-                        model.OrdineModel ordineModel = new model.OrdineModel();
+                        dao.OrdineDAO ordineModel = new dao.OrdineDAO();
                         java.util.Collection<model.OrdineBean> storicoOrdini = ordineModel.doRetrieveByCliente(ut.getId());
                         request.setAttribute("storicoOrdini", storicoOrdini);
                     } catch (java.sql.SQLException e) {
@@ -114,7 +114,7 @@ public class NavigazioneServlet extends HttpServlet {
 
                 try {
                     int idOrdine = Integer.parseInt(idOrdString);
-                    model.OrdineModel oModel = new model.OrdineModel();
+                    dao.OrdineDAO oModel = new dao.OrdineDAO();
                     model.OrdineBean ordine = oModel.doRetrieveByKey(idOrdine);
 
                     // Controllo di sicurezza: l'ordine deve appartenere all'utente loggato
@@ -187,6 +187,34 @@ public class NavigazioneServlet extends HttpServlet {
 
             default:
                 request.getRequestDispatcher("/WEB-INF/view/errore.jsp").forward(request, response);
+                break;
+            case "admin":
+                HttpSession sessionAdmin = request.getSession();
+                String ruoloAdmin = (String) sessionAdmin.getAttribute("tipo");
+                
+                // 1. Controllo di sicurezza
+                if (!"admin".equals(ruoloAdmin)) {
+                    response.sendRedirect(request.getContextPath() + "/NavigazioneServlet?page=login");
+                    return;
+                }
+                
+                try {
+                    dao.ProdottoDAO prodottoDAO = new dao.ProdottoDAO();
+                    dao.OrdineDAO ordineModel = new dao.OrdineDAO();
+                    
+
+                    java.util.Collection<model.ProdottoBean> listaProdotti = prodottoDAO.doRetrieveAll();
+                    java.util.Collection<model.OrdineBean> listaOrdini = ordineModel.doRetrieveAll(); 
+                    
+                    request.setAttribute("listaProdotti", listaProdotti);
+                    request.setAttribute("listaOrdini", listaOrdini);
+                    
+                } catch (java.sql.SQLException e) {
+                    e.printStackTrace();
+                    System.out.println("DEBUG ADMIN: Errore nel caricamento dei dati della dashboard.");
+                }
+                
+                request.getRequestDispatcher("/WEB-INF/view/ALogin/dashboard.jsp").forward(request, response);
                 break;
         }
     }

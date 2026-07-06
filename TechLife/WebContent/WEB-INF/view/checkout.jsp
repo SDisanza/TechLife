@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Checkout - Tech Life</title>
-    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
+    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style/style.css">
 </head>
 <body>
 
@@ -40,15 +40,15 @@
                         <h3>1. Indirizzo di Spedizione</h3>
                         <div class="indirizzo-item">
                             <%
-                                model.SpedizioneModel spedModel = new model.SpedizioneModel();
-                                String tipoUtente = (String) session.getAttribute("tipo");
-                                java.util.Collection<model.SpedizioneBean> indirizziSalvati = null;
-                                
-                                if ("azienda".equals(tipoUtente)) {
-                                    indirizziSalvati = spedModel.getIndirizziAzienda(utente.getId());
-                                } else {
-                                    indirizziSalvati = spedModel.getIndirizziPrivato(utente.getId());
-                                }
+                            dao.SpedizioneDAO spedModel = new dao.SpedizioneDAO();
+                                                                                        String tipoUtente = (String) session.getAttribute("tipo");
+                                                                                        java.util.Collection<model.SpedizioneBean> indirizziSalvati = null;
+                                                                                        
+                                                                                        if ("azienda".equals(tipoUtente)) {
+                                                                                            indirizziSalvati = spedModel.getIndirizziAzienda(utente.getId());
+                                                                                        } else {
+                                                                                            indirizziSalvati = spedModel.getIndirizziPrivato(utente.getId());
+                                                                                        }
                             %>
 
                             <% if (indirizziSalvati != null && !indirizziSalvati.isEmpty()) { %>

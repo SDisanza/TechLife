@@ -5,7 +5,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Registrazione - Tech Life</title>
-		<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
+		<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style/style.css">
 		<script src="${pageContext.request.contextPath}/script/validation.js"></script>
 	</head>
 	<body>

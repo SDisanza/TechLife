@@ -1,11 +1,14 @@
-package model;
+package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UtenteModel {
+import model.DSConnectionPool;
+import model.UtenteBean;
+
+public class UtenteDAO {
 
 	public UtenteBean doRetrieveByKey(String email) throws SQLException {
 	    Connection connection = null;
@@ -14,7 +17,7 @@ public class UtenteModel {
 	    UtenteBean bean = null;
 
 	    try {
-	        connection = DriverManagerConnectionPool.getConnection();
+	        connection = DSConnectionPool.getConnection();
 
 	        String sqlUtente = "SELECT * FROM AnagraficaUtente WHERE Email = ?";
 	        ps = connection.prepareStatement(sqlUtente);
@@ -23,6 +26,7 @@ public class UtenteModel {
 
 	        if (rs.next()) {
 	            bean = new UtenteBean();
+	            bean.setId(rs.getInt("ID"));
 	            bean.setNome(rs.getString("Nome"));
 	            bean.setCognome(rs.getString("Cognome"));
 	            bean.setEmail(rs.getString("Email"));
@@ -54,7 +58,7 @@ public class UtenteModel {
 	    } finally {
 	        if (rs != null) rs.close();
 	        if (ps != null) ps.close();
-	        if (connection != null) DriverManagerConnectionPool.releaseConnection(connection);
+	        if (connection != null) connection.close();
 	    }
 	    return null; 
 	}
@@ -63,7 +67,8 @@ public class UtenteModel {
 	    PreparedStatement ps = null;
 
 	    try {
-	        connection = DriverManagerConnectionPool.getConnection();
+	        connection = DSConnectionPool.getConnection();
+	        connection.setAutoCommit(false);
 	        
 	        String sql = "INSERT INTO AnagraficaUtente (Nome, Cognome, Codice_Fiscale, Luogo_di_Nascita, Data_di_Nascita, Comune_Residenza, Indirizzo_Residenza, CAP_Residenza, Comune_Domicilio, Indirizzo_Domicilio, CAP_Domicilio, Email, Password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	        
@@ -102,7 +107,8 @@ public class UtenteModel {
 	            try { ps.close(); } catch (SQLException e) { e.printStackTrace(); }
 	        }
 	        if (connection != null) {
-	            DriverManagerConnectionPool.releaseConnection(connection);
+	        	try { connection.setAutoCommit(true); } catch (SQLException e) { e.printStackTrace(); }
+	        	connection.close();
 	        }
 	    }
 	}
@@ -112,7 +118,9 @@ public class UtenteModel {
 	    PreparedStatement ps = null;
 
 	    try {
-	        connection = DriverManagerConnectionPool.getConnection();
+	        connection = DSConnectionPool.getConnection();
+	        connection.setAutoCommit(false);
+	        
 	        String sql = "INSERT INTO AnagraficaPIVA (NomeAzienda, Partita_IVA, Comune_Legale, Indirizzo_Legale, CAP_Legale, PEC, Email, Password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 	        
 	        ps = connection.prepareStatement(sql);
@@ -144,7 +152,8 @@ public class UtenteModel {
 	            try { ps.close(); } catch (SQLException e) { e.printStackTrace(); }
 	        }
 	        if (connection != null) {
-	            DriverManagerConnectionPool.releaseConnection(connection);
+	        	try { connection.setAutoCommit(true); } catch (SQLException e) { e.printStackTrace(); }
+	            connection.close();
 	        }
 	    }
 	}

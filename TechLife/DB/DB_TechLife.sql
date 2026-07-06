@@ -33,6 +33,13 @@ Password varchar(500) not NULL,
 PRIMARY KEY(ID)
 );
 
+Create table Amministratori(
+    ID int not NULL auto_Increment,
+    Email varchar(50) not NULL,
+    Password varchar(500) not NULL,
+    PRIMARY KEY(ID)
+);
+
 Create table Spedizione_Utente(
 ID int not NULL auto_increment,
 ID_Utente int not NULL,
@@ -99,6 +106,9 @@ PRIMARY KEY(ID),
 FOREIGN KEY (ID_Ordine) REFERENCES Ordine(ID),
 FOREIGN KEY (ID_Prodotto) REFERENCES Prodotto(ID)
 );
+
+INSERT INTO Amministratori (Email, Password) VALUES 
+('admin@admin.it', 'prMYfOn007DCYfHouiK0L3FeK9qEoE6cRZb5zXD+HBc=');
 
 INSERT INTO AnagraficaUtente (Nome, Cognome, Codice_Fiscale, Luogo_di_Nascita, Data_di_Nascita, Comune_Residenza, Indirizzo_Residenza, CAP_Residenza, 
 	Comune_Domicilio, Indirizzo_Domicilio, CAP_Domicilio, Email, Password) VALUES 

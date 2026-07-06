@@ -6,8 +6,7 @@
 	<head>
 	    <meta charset="UTF-8">
 	    <title>Catalogo</title>
-	    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
-	    <%@ page import="model.DriverManagerConnectionPool" %> 
+	    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style/style.css">
 	</head>
 	<body>
 	<%if (session != null && session.getAttribute("utente") != null) 
@@ -17,7 +16,6 @@
     }%>
     
     <%
-        // Recuperiamo dinamicamente il numero di elementi per il badge
         int badgeCount = 0;
         Carrello cartOspite = (session != null) ? (Carrello) session.getAttribute("carrello") : null;
         if (cartOspite != null) {
@@ -47,65 +45,54 @@
     
     <div id="catalog-container">
         <%
-	        Connection conn = null;
-	        PreparedStatement stmt = null;
-	        ResultSet rs = null;
-	        
 	        try {
-	            conn = DriverManagerConnectionPool.getConnection();
-	            String query = "SELECT ID, Nome, Prezzo, Foto, Descrizione FROM Prodotto";
-	            stmt = conn.prepareStatement(query);
-	            rs = stmt.executeQuery();
+	            dao.ProdottoDAO prodottoDAO = new dao.ProdottoDAO();
+	            java.util.Collection<model.ProdottoBean> prodotti = prodottoDAO.doRetrieveAll();
 	            
-	            if (!rs.isBeforeFirst()) {
+	            if (prodotti == null || prodotti.isEmpty()) {
 		%>
-		<div class="no-products">
-		    <p>Nessun prodotto disponibile al momento. Stiamo aggiornando il catalogo.</p>
-		</div>
+				<div class="no-products">
+				    <p>Nessun prodotto disponibile al momento. Stiamo aggiornando il catalogo.</p>
+				</div>
 		<%
-		}
-		while (rs.next()) {
-		    int id = rs.getInt("ID");
-		    String nome = rs.getString("Nome");
-		    double prezzo = rs.getDouble("Prezzo");
-		    String foto = rs.getString("Foto");
-		    String descrizione = rs.getString("Descrizione");
+				} else {
+					for (model.ProdottoBean p : prodotti) {
+					    int id = p.getId();
+					    String nome = p.getNome();
+					    double prezzo = p.getPrezzo();
+					    String foto = p.getFoto();
+					    String descrizione = p.getDescrizione();
 		%>
 
-		<div class="product-card">
-		    <a href="dettaglioProdotto.jsp?id=<%= id %>" class="product-details-link">
-		   <div class="product-image-wrapper">
-		       <img src="${pageContext.request.contextPath}/<%= foto %>" alt="<%= nome %>" class="product-image">
-		   </div>
-		   <h3 class="product-title"><%= nome %></h3>
-		   <p class="product-description"><%= descrizione %></p>
-		</a>
-		<div class="product-footer">
-		    <span class="product-price">€ <%= String.format(Locale.US, "%,.2f", prezzo) %></span>
-		   <form action="${pageContext.request.contextPath}/CarrelloServlet" method="POST" class="product-cart-form">
-		       <input type="hidden" name="idProdotto" value="<%= id %>">
-		       <input type="hidden" name="azione" value="aggiungi">
-		       <button type="submit" class="btn-cart">Aggiungi</button>
-		   </form>
-		    </div>
-		    
-		</div>
+					<div class="product-card">
+					    <a href="dettaglioProdotto.jsp?id=<%= id %>" class="product-details-link">
+						   <div class="product-image-wrapper">
+						       <img src="${pageContext.request.contextPath}/<%= foto %>" alt="<%= nome %>" class="product-image">
+						   </div>
+						   <h3 class="product-title"><%= nome %></h3>
+						   <p class="product-description"><%= descrizione %></p>
+						</a>
+						<div class="product-footer">
+						    <span class="product-price">€ <%= String.format(Locale.US, "%,.2f", prezzo) %></span>
+						   <form action="${pageContext.request.contextPath}/CarrelloServlet" method="POST" class="product-cart-form">
+						       <input type="hidden" name="idProdotto" value="<%= id %>">
+						       <input type="hidden" name="azione" value="aggiungi">
+						       <button type="submit" class="btn-cart">Aggiungi</button>
+						   </form>
+					    </div>
+					</div>
 		<%
-		    }
-		} catch (Exception e) {
+					} 
+				} 
+			} catch (Exception e) {
 		%>
-		<div class="no-products">
-		    <p style="color: #ff3b30;">Errore nel caricamento dei prodotti: <%= e.getMessage() %></p>
-		</div>
+			<div class="no-products">
+			    <p style="color: #ff3b30;">Errore nel caricamento dei prodotti: <%= e.getMessage() %></p>
+			</div>
 		<%
-		} finally {
-		    if (rs != null) rs.close();
-		    if (stmt != null) stmt.close();
-		    if (conn != null) conn.close();
-		}
+			}
 		%>
-		
-		</div>
+	</div>
 
 	</body>
 </html>

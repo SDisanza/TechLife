@@ -3,6 +3,8 @@ package controller;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
+
+import dao.UtenteDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,7 +12,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.UtenteBean;
-import model.UtenteModel;
 
 @WebServlet("/RegistrazioneServlet")
 public class RegistrazioneServlet extends HttpServlet {
@@ -34,7 +35,7 @@ public class RegistrazioneServlet extends HttpServlet {
 
         String passwordCifrata = LoginServlet.hashPassword(password);
         
-        UtenteModel model = new UtenteModel();
+        UtenteDAO model = new UtenteDAO();
         UtenteBean bean = new UtenteBean();
         bean.setEmail(email);
         bean.setPwd(passwordCifrata);

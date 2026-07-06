@@ -12,7 +12,7 @@
 		<meta charset="UTF-8">
 		<title>Dove Siamo</title>
 		
-		<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
+		<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style/style.css">
 		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
           integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
           crossorigin=""/>

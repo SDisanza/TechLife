@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>TechLife - Si è verificato un errore</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css">
+    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style/style.css">
 </head>
 <body>
     <div class="error-page-container">

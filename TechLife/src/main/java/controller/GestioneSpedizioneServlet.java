@@ -2,6 +2,8 @@ package controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+
+import dao.SpedizioneDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,7 +13,6 @@ import jakarta.servlet.http.HttpSession;
 
 import model.UtenteBean;
 import model.SpedizioneBean;
-import model.SpedizioneModel;
 
 @WebServlet("/GestioneSpedizioneServlet")
 public class GestioneSpedizioneServlet extends HttpServlet {
@@ -32,7 +33,7 @@ public class GestioneSpedizioneServlet extends HttpServlet {
         }
 
         String azione = request.getParameter("azione");
-        SpedizioneModel model = new SpedizioneModel();
+        SpedizioneDAO model = new SpedizioneDAO();
 
         try {
             System.out.println("DEBUG SPEDIZIONE: Ricevuta azione = '" + azione + "' | Tipo utente = '" + tipoUtente + "'");

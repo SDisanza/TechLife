@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="model.SpedizioneModel, model.OrdineBean, model.SpedizioneBean, model.UtenteBean, java.text.SimpleDateFormat, java.util.Locale, java.util.Collection" %>
+<%@ page import="dao.SpedizioneDAO,model.OrdineBean,model.SpedizioneBean,model.UtenteBean,java.text.SimpleDateFormat,java.util.Locale,java.util.Collection" %>
 <%
-    UtenteBean utente = (UtenteBean) session.getAttribute("utente");
+UtenteBean utente = (UtenteBean) session.getAttribute("utente");
     if (utente == null) {
     	response.sendRedirect(request.getContextPath() + "/NavigazioneServlet?page=login");
         return;
@@ -20,7 +20,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Il Mio Profilo - Tech Life</title>
-    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
+    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style/style.css">
 </head>
 <body>
 
@@ -33,59 +33,69 @@
     <div id="profile-container" class="about-card">
         <div class="profile-header">
             <h2>Riepilogo Dati Account</h2>
-            <p>Tipologia Account: <strong><%= isAzienda ? "Azienda / Professionista" : "Cliente Privato" %></strong></p>
+            <p>Tipologia Account: <strong><%=isAzienda ? "Azienda / Professionista" : "Cliente Privato"%></strong></p>
         </div>
 
         <div class="profile-details">
-            <% if (!isAzienda) { %>
+            <%
+            if (!isAzienda) {
+            %>
                 <div class="info-group">
                     <span class="info-label">Nome:</span>
-                    <span class="info-value"><%= utente.getNome() %></span>
+                    <span class="info-value"><%=utente.getNome()%></span>
                 </div>
                 <div class="info-group">
                     <span class="info-label">Cognome:</span>
-                    <span class="info-value"><%= utente.getCognome() %></span>
+                    <span class="info-value"><%=utente.getCognome()%></span>
                 </div>
                 <div class="info-group">
                     <span class="info-label">Codice Fiscale:</span>
-                    <span class="info-value"><%= utente.getcodiceFiscale() %></span>
+                    <span class="info-value"><%=utente.getcodiceFiscale()%></span>
                 </div>
-                <% if (utente.getDataNascita() != null) { %>
+                <%
+                if (utente.getDataNascita() != null) {
+                %>
                     <div class="info-group">
                         <span class="info-label">Data di Nascita:</span>
-                        <span class="info-value"><%= utente.getDataNascita() %></span>
+                        <span class="info-value"><%=utente.getDataNascita()%></span>
                     </div>
-                <% } %>
-            <% } else { %>
+                <%
+                }
+                %>
+            <%
+            } else {
+            %>
                 <div class="info-group">
                     <span class="info-label">Ragione Sociale:</span>
-                    <span class="info-value"><%= utente.getNome() %></span>
+                    <span class="info-value"><%=utente.getNome()%></span>
                 </div>
                 <div class="info-group">
                     <span class="info-label">Partita IVA:</span>
-                    <span class="info-value"><%= utente.getcodiceFiscale() %></span>
+                    <span class="info-value"><%=utente.getcodiceFiscale()%></span>
                 </div>
-            <% } %>
+            <%
+            }
+            %>
 
             <div class="info-group">
                 <span class="info-label">Indirizzo Email:</span>
-                <span class="info-value"><%= utente.getEmail() %></span>
+                <span class="info-value"><%=utente.getEmail()%></span>
             </div>
         </div>
     </div>
     
     <%
-        SpedizioneModel spedizioneModel = new SpedizioneModel();
-        Collection<SpedizioneBean> listaIndirizzi = null;
-        
-        if (utente != null && tipoUtente != null) {
-            if ("privato".equals(tipoUtente)) {
-                listaIndirizzi = spedizioneModel.getIndirizziPrivato(utente.getId());
-            } else if ("azienda".equals(tipoUtente)) {
-                listaIndirizzi = spedizioneModel.getIndirizziAzienda(utente.getId());
-            }
-        }
-    %>
+        SpedizioneDAO spedizioneModel = new SpedizioneDAO();
+                Collection<SpedizioneBean> listaIndirizzi = null;
+                
+                if (utente != null && tipoUtente != null) {
+                    if ("privato".equals(tipoUtente)) {
+                        listaIndirizzi = spedizioneModel.getIndirizziPrivato(utente.getId());
+                    } else if ("azienda".equals(tipoUtente)) {
+                        listaIndirizzi = spedizioneModel.getIndirizziAzienda(utente.getId());
+                    }
+                }
+        %>
 
     <div id="profile-container" class="about-card" style="margin-top: 30px;">
         <div class="profile-header">

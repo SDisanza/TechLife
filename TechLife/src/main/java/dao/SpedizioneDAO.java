@@ -1,4 +1,4 @@
-package model;
+package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,7 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class SpedizioneModel {
+import model.DSConnectionPool;
+import model.SpedizioneBean;
+
+public class SpedizioneDAO {
 
     public void aggiungiIndirizzoUtente(SpedizioneBean bean) throws SQLException {
         Connection connection = null;
@@ -16,7 +19,7 @@ public class SpedizioneModel {
         String sql = "INSERT INTO Spedizione_Utente (ID_Utente, Email_Utente, Indirizzo_Spedizione, CAP_Spedizione, Comune_Spedizione, Provincia_Spedizione, Note) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
-            connection = DriverManagerConnectionPool.getConnection();
+            connection = DSConnectionPool.getConnection();
             ps = connection.prepareStatement(sql);
             ps.setInt(1, bean.getIdUtenteAzienda());
             ps.setString(2, bean.getEmail());
@@ -27,16 +30,11 @@ public class SpedizioneModel {
             ps.setString(7, bean.getNote());
 
             ps.executeUpdate();
-            connection.commit();
+            
             System.out.println("DEBUG SPEDIZIONE: aggiungiIndirizzoUtente completato con commit!");
-        } catch (SQLException e) {
-            if (connection != null) {
-                connection.rollback();
-            }
-            throw e;
         } finally {
             if (ps != null) ps.close();
-            if (connection != null) DriverManagerConnectionPool.releaseConnection(connection);
+            if (connection != null) connection.close();
         }
     }
 	
@@ -47,7 +45,7 @@ public class SpedizioneModel {
         String sql = "INSERT INTO Spedizione_Azienda (ID_Azienda, Email_Azienda, Pec_Azienda, Indirizzo_Spedizione, CAP_Spedizione, Comune_Spedizione, Provincia_Spedizione, Note) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
-            connection = DriverManagerConnectionPool.getConnection();
+            connection = DSConnectionPool.getConnection();
             ps = connection.prepareStatement(sql);
             ps.setInt(1, bean.getIdUtenteAzienda());
             ps.setString(2, bean.getEmail());
@@ -61,14 +59,9 @@ public class SpedizioneModel {
             ps.executeUpdate();
             connection.commit();
             System.out.println("DEBUG SPEDIZIONE: aggiungiIndirizzoAzienda completato con commit!");
-        } catch (SQLException e) {
-            if (connection != null) {
-                connection.rollback();
-            }
-            throw e;
         } finally {
             if (ps != null) ps.close();
-            if (connection != null) DriverManagerConnectionPool.releaseConnection(connection);
+            if (connection != null) connection.close();
         }
     }
 	
@@ -80,7 +73,7 @@ public class SpedizioneModel {
         String sql = "SELECT * FROM Spedizione_Utente WHERE ID_Utente = ?";
 
         try {
-            connection = DriverManagerConnectionPool.getConnection();
+            connection = DSConnectionPool.getConnection();
             ps = connection.prepareStatement(sql);
             ps.setInt(1, idUtente);
 
@@ -99,7 +92,7 @@ public class SpedizioneModel {
             }
         } finally {
             if (ps != null) ps.close();
-            if (connection != null) DriverManagerConnectionPool.releaseConnection(connection);
+            if (connection != null) connection.close();
         }
         return lista;
     }
@@ -112,7 +105,7 @@ public class SpedizioneModel {
         String sql = "SELECT * FROM Spedizione_Azienda WHERE ID_Azienda = ?";
 
         try {
-            connection = DriverManagerConnectionPool.getConnection();
+            connection = DSConnectionPool.getConnection();
             ps = connection.prepareStatement(sql);
             ps.setInt(1, idAzienda);
 
@@ -132,7 +125,7 @@ public class SpedizioneModel {
             }
         } finally {
             if (ps != null) ps.close();
-            if (connection != null) DriverManagerConnectionPool.releaseConnection(connection);
+            if (connection != null) connection.close();
         }
         return lista;
     }
@@ -145,7 +138,7 @@ public class SpedizioneModel {
         String sql = "DELETE FROM " + tabella + " WHERE ID = ?";
 
         try {
-            connection = DriverManagerConnectionPool.getConnection();
+            connection = DSConnectionPool.getConnection();
             ps = connection.prepareStatement(sql);
             ps.setInt(1, idSpedizione);
 
@@ -159,7 +152,7 @@ public class SpedizioneModel {
             throw e;
         } finally {
             if (ps != null) ps.close();
-            if (connection != null) DriverManagerConnectionPool.releaseConnection(connection);
+            if (connection != null) connection.close();
         }
     }
 
@@ -170,7 +163,7 @@ public class SpedizioneModel {
         boolean esiste = false;
 
         try {
-            con = DriverManagerConnectionPool.getConnection();
+            con = DSConnectionPool.getConnection();
             
             String query;
             if ("privato".equals(tipoUtente)) {
@@ -192,7 +185,7 @@ public class SpedizioneModel {
         } finally {
             if (rs != null) rs.close();
             if (ps != null) ps.close();
-            if (con != null) DriverManagerConnectionPool.releaseConnection(con);
+            if (con != null) con.close();
         }
         return esiste;
     }

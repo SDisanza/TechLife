@@ -2,6 +2,8 @@ package controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+
+import dao.ProdottoDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,7 +12,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Carrello;
 import model.ProdottoBean;
-import model.ProdottoModel;
 
 @WebServlet("/CarrelloServlet")
 public class CarrelloServlet extends HttpServlet {
@@ -33,14 +34,14 @@ public class CarrelloServlet extends HttpServlet {
         
         System.out.println("DEBUG CARRELLO: Azione = " + azione + ", ID Prodotto = " + idString);
 
-        ProdottoModel model = new ProdottoModel();
+        ProdottoDAO prodottoDAO = new ProdottoDAO();
 
         try {
             if ("aggiungi".equals(azione)) {
                 if (idString != null) {
                     int id = Integer.parseInt(idString);
                     // Prendiamo il prodotto aggiornato dal DB
-                    ProdottoBean prodotto = model.doRetrieveByKey(id);
+                    ProdottoBean prodotto = prodottoDAO.doRetrieveByKey(id);
                     if (prodotto != null) {
                         carrello.aggiungiProdotto(prodotto, 1);
                         System.out.println("DEBUG CARRELLO: Prodotto " + prodotto.getNome() + " aggiunto.");
@@ -51,7 +52,7 @@ public class CarrelloServlet extends HttpServlet {
             else if ("rimuovi".equals(azione)) {
                 if (idString != null) {
                     int id = Integer.parseInt(idString);
-                    ProdottoBean prodotto = model.doRetrieveByKey(id);
+                    ProdottoBean prodotto = prodottoDAO.doRetrieveByKey(id);
                     if (prodotto != null) {
                         carrello.rimuoviProdotto(prodotto);
                         System.out.println("DEBUG CARRELLO: Prodotto rimosso.");
@@ -64,7 +65,7 @@ public class CarrelloServlet extends HttpServlet {
                 if (idString != null && quantitaString != null) {
                     int id = Integer.parseInt(idString);
                     int nuovaQuantita = Integer.parseInt(quantitaString);
-                    ProdottoBean producto = model.doRetrieveByKey(id);
+                    ProdottoBean producto = prodottoDAO.doRetrieveByKey(id);
                     if (producto != null) {
                         carrello.aggiornaQuantita(producto, nuovaQuantita);
                         System.out.println("DEBUG CARRELLO: Quantità aggiornata a " + nuovaQuantita);
@@ -80,7 +81,7 @@ public class CarrelloServlet extends HttpServlet {
             model.UtenteBean utenteLoggato = (model.UtenteBean) session.getAttribute("utente");
             if (utenteLoggato != null) {
                 try {
-                    model.CarrelloModel carrelloModel = new model.CarrelloModel();
+                    dao.CarrelloDAO carrelloModel = new dao.CarrelloDAO();
                     carrelloModel.salvaCarrello(utenteLoggato.getId(), carrello);
                     System.out.println("DEBUG CARRELLO DB: Carrello salvato su database per utente #" + utenteLoggato.getId());
                 } catch (java.sql.SQLException e) {

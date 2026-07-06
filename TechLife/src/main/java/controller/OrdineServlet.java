@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Carrello;
+import model.DSConnectionPool;
 import model.DriverManagerConnectionPool;
 import model.UtenteBean;
 
@@ -36,7 +37,7 @@ public class OrdineServlet extends HttpServlet {
         String idIndirizzoSelezionato = request.getParameter("id_indirizzo_selezionato");
 
         try {
-            model.SpedizioneModel spedizioneModel = new model.SpedizioneModel();
+            dao.SpedizioneDAO spedizioneModel = new dao.SpedizioneDAO();
             java.util.Collection<model.SpedizioneBean> listaIndirizzi;
 
             // Recuperiamo la lista degli indirizzi già salvati dal DB a seconda della tipologia account
@@ -83,7 +84,7 @@ public class OrdineServlet extends HttpServlet {
         String sql = "INSERT INTO Ordine (ID_Cliente, Tipo_Cliente, Totale_Ordine) VALUES (?, ?, ?)";
 
         try {
-            connection = DriverManagerConnectionPool.getConnection();
+            connection = DSConnectionPool.getConnection();
             ps = connection.prepareStatement(sql);
             ps.setInt(1, utente.getId());
             ps.setString(2, tipoUtente != null ? tipoUtente : "privato");
@@ -106,7 +107,7 @@ public class OrdineServlet extends HttpServlet {
             model.UtenteBean utenteLoggato = (model.UtenteBean) request.getSession().getAttribute("utente");
             if (utenteLoggato != null) {
                 try {
-                    model.CarrelloModel carrelloModel = new model.CarrelloModel();
+                    dao.CarrelloDAO carrelloModel = new dao.CarrelloDAO();
                     carrelloModel.salvaCarrello(utenteLoggato.getId(), carrello);
                 } catch (java.sql.SQLException e) {
                     e.printStackTrace();
@@ -126,7 +127,7 @@ public class OrdineServlet extends HttpServlet {
             if (ps != null) try { ps.close(); } catch (SQLException e) { e.printStackTrace(); }
             if (connection != null) {
                 try {
-                    DriverManagerConnectionPool.releaseConnection(connection);
+                    connection.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

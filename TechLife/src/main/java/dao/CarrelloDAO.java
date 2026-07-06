@@ -1,4 +1,4 @@
-package model;
+package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,7 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
-public class CarrelloModel {
+import model.Carrello;
+import model.ProdottoBean;
+import model.DSConnectionPool;
+
+public class CarrelloDAO {
 
     // Sincronizzazione
     public void salvaCarrello(int idUtente, Carrello carrello) throws SQLException {
@@ -15,7 +19,8 @@ public class CarrelloModel {
         PreparedStatement psInsert = null;
 
         try {
-            connection = DriverManagerConnectionPool.getConnection();
+            connection = DSConnectionPool.getConnection();
+            connection.setAutoCommit(false);
             
             // 1. Puliamo il vecchio carrello salvato per evitare duplicati
             String sqlDelete = "DELETE FROM Carrello_Salvato WHERE ID_Utente = ?";
@@ -43,7 +48,7 @@ public class CarrelloModel {
         } finally {
             if (psDelete != null) psDelete.close();
             if (psInsert != null) psInsert.close();
-            if (connection != null) DriverManagerConnectionPool.releaseConnection(connection);
+            if (connection != null) connection.close();
         }
     }
 
@@ -53,12 +58,12 @@ public class CarrelloModel {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Carrello carrello = new Carrello();
-        ProdottoModel prodottoModel = new ProdottoModel();
+        ProdottoDAO prodottoDAO = new ProdottoDAO();
 
         String sql = "SELECT ID_Prodotto, Quantita FROM Carrello_Salvato WHERE ID_Utente = ?";
 
         try {
-            connection = DriverManagerConnectionPool.getConnection();
+            connection = DSConnectionPool.getConnection();
             ps = connection.prepareStatement(sql);
             ps.setInt(1, idUtente);
             rs = ps.executeQuery();
@@ -67,7 +72,7 @@ public class CarrelloModel {
                 int idProdotto = rs.getInt("ID_Prodotto");
                 int quantita = rs.getInt("Quantita");
                 
-                ProdottoBean prodotto = prodottoModel.doRetrieveByKey(idProdotto);
+                ProdottoBean prodotto = prodottoDAO.doRetrieveByKey(idProdotto);
                 if (prodotto != null) {
                     carrello.aggiungiProdotto(prodotto, quantita);
                 }
@@ -75,7 +80,7 @@ public class CarrelloModel {
         } finally {
             if (rs != null) rs.close();
             if (ps != null) ps.close();
-            if (connection != null) DriverManagerConnectionPool.releaseConnection(connection);
+            if (connection != null) connection.close();
         }
         return carrello;
     }

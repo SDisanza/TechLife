@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login - Tech Life</title>
-    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
+    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style/style.css">
 </head>
 <body>
 
@@ -43,7 +43,7 @@
                 </div>
 
                 <div class="button-group">
-                    <button type="submit" class="btn-register">Accedi</button>
+                    <button type="submit" class="btn-register btn-block">Accedi</button>
                 </div>
             </form>
         </div>

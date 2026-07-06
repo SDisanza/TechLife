@@ -10,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.DSConnectionPool;
 import model.DriverManagerConnectionPool;
 
 @WebServlet("/RecuperoPasswordServlet")
@@ -38,7 +39,7 @@ public class RecuperoPasswordServlet extends HttpServlet {
         ResultSet rs = null;
 
         try {
-            connection = DriverManagerConnectionPool.getConnection();
+            connection = DSConnectionPool.getConnection();
 
             if ("verificaEmail".equals(azione)) {
                 System.out.println("-> Fase: Verifica Email");
@@ -143,7 +144,7 @@ public class RecuperoPasswordServlet extends HttpServlet {
             try {
                 if (rs != null) rs.close();
                 if (ps != null) ps.close();
-                if (connection != null) DriverManagerConnectionPool.releaseConnection(connection);
+                if (connection != null) connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }

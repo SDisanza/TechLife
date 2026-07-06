@@ -12,7 +12,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Tech Life Home</title>
-		<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
+		<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style/style.css">
 	</head>
 	<body>
 		<% if (utenteLoggato != null) { %>

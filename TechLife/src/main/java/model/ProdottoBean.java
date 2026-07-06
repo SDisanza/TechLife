@@ -42,4 +42,6 @@ public class ProdottoBean implements Serializable {
     public int hashCode() {
         return Integer.hashCode(id);
     }
+    
+    
 }

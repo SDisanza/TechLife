@@ -10,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.DSConnectionPool;
 import model.DriverManagerConnectionPool;
 
 @WebServlet("/ValidaAjaxServlet")
@@ -34,7 +35,7 @@ public class ValidaAjaxServlet extends HttpServlet {
             ResultSet rs2 = null;
 
             try {
-                connection = DriverManagerConnectionPool.getConnection();
+                connection = DSConnectionPool.getConnection();
 
                 switch (tipo) {
                     case "email":
@@ -95,7 +96,7 @@ public class ValidaAjaxServlet extends HttpServlet {
                     if (ps1 != null) ps1.close();
                     if (rs2 != null) rs2.close();
                     if (ps2 != null) ps2.close();
-                    if (connection != null) DriverManagerConnectionPool.releaseConnection(connection);
+                    if (connection != null) connection.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

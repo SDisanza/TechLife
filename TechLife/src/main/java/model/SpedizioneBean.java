@@ -3,7 +3,7 @@ package model;
 import java.io.Serializable;
 
 public class SpedizioneBean implements Serializable{
-	public static final long SerialVersionUID = 1L;
+	public static final long serialVersionUID = 1L;
 	
 	private int id;
 	private int idUtenteAzienda; 

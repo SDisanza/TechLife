@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Tech Life Home</title>
-		<link type="text/css" rel="stylesheet" href="style.css">
+		<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style/style.css">
 	</head>
 	<body>
 	<%if (session != null && session.getAttribute("utente") != null) 

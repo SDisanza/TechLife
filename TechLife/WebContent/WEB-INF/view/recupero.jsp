@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Recupero Password - Tech Life</title>
-    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
+    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style/style.css">
 </head>
 <body>
 
