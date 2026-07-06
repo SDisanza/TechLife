@@ -62,13 +62,11 @@
 		%>
 
 					<div class="product-card">
-					    <a href="dettaglioProdotto.jsp?id=<%= id %>" class="product-details-link">
 						   <div class="product-image-wrapper">
 						       <img src="${pageContext.request.contextPath}/<%= foto %>" alt="<%= nome %>" class="product-image">
 						   </div>
 						   <h3 class="product-title"><%= nome %></h3>
 						   <p class="product-description"><%= descrizione %></p>
-						</a>
 						<div class="product-footer">
 						    <span class="product-price">€ <%= String.format(Locale.US, "%,.2f", prezzo) %></span>
 						   <form action="${pageContext.request.contextPath}/CarrelloServlet" method="POST" class="product-cart-form">
