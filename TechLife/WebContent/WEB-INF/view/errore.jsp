@@ -26,9 +26,9 @@
                 </p>
                 
                 <div class="error-actions">
-                    <a href="${pageContext.request.contextPath}/NavigazioneServlet?page=login">
+                    <a href="${pageContext.request.contextPath}/NavigazioneServlet?page=homelogin">
                         <button type="button" class="btn-register">
-                            Torna al Login
+                            Torna alla Home
                         </button>
                     </a>
                 </div>

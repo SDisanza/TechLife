@@ -185,8 +185,8 @@ UtenteBean utente = (UtenteBean) session.getAttribute("utente");
         </form>
     </div>
 
-	<div class="checkout-page-container" style="margin-top: 40px;">
-	    <h2>Storico dei tuoi Ordini & Fatture</h2>
+	<div class="cart-page-container" style="margin-top: 40px;">
+	    <h1 >Storico dei tuoi Ordini & Fatture</h1>
 	    
 	    <%
 	        Collection<OrdineBean> storicoOrdini = (Collection<OrdineBean>) request.getAttribute("storicoOrdini");
@@ -196,7 +196,7 @@ UtenteBean utente = (UtenteBean) session.getAttribute("utente");
 	    <%
 	        } else {
 	    %>
-	        <table class="invoice-table">
+	        <table class="cart-table">
 	            <thead>
 	                <tr>
 	                    <th>ID Ordine</th>
@@ -214,11 +214,10 @@ UtenteBean utente = (UtenteBean) session.getAttribute("utente");
 	                        <td><strong>#<%= ord.getId() %></strong></td>
 	                        <td><%= sdf.format(ord.getDataOrdine()) %></td>
 	                        <td class="final-price">
-	                            <%-- Utilizziamo il getter del tuo nuovo OrdineBean --%>
 	                            € <%= String.format(Locale.US, "%,.2f", ord.getTotaleOrdine()) %>
 	                        </td>
 	                        <td>
-	                            <a href="${pageContext.request.contextPath}/NavigazioneServlet?page=vediFattura&id=<%= ord.getId() %>" class="no-print-btn" style="padding: 6px 12px; font-size: 0.85em; text-decoration: none; margin: 0;">Vedi Fattura</a>
+	                            <a href="${pageContext.request.contextPath}/NavigazioneServlet?page=vediFattura&id=<%= ord.getId() %>" class="nav-link-home">Vedi Fattura</a>
 	                        </td>
 	                    </tr>
 	                <% } %>

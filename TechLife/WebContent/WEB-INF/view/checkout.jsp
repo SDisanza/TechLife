@@ -31,6 +31,7 @@
         <%
             } else {
         %>
+        <div class="admin-dashboard-layout">
             <div class="checkout-grid">
                 
                 <!-- SEZIONE SINISTRA: FORM DI ACQUISTO -->
@@ -41,14 +42,14 @@
                         <div class="indirizzo-item">
                             <%
                             dao.SpedizioneDAO spedModel = new dao.SpedizioneDAO();
-                                                                                        String tipoUtente = (String) session.getAttribute("tipo");
-                                                                                        java.util.Collection<model.SpedizioneBean> indirizziSalvati = null;
-                                                                                        
-                                                                                        if ("azienda".equals(tipoUtente)) {
-                                                                                            indirizziSalvati = spedModel.getIndirizziAzienda(utente.getId());
-                                                                                        } else {
-                                                                                            indirizziSalvati = spedModel.getIndirizziPrivato(utente.getId());
-                                                                                        }
+                            String tipoUtente = (String) session.getAttribute("tipo");
+                            java.util.Collection<model.SpedizioneBean> indirizziSalvati = null;
+                            
+                            if ("azienda".equals(tipoUtente)) {
+                                indirizziSalvati = spedModel.getIndirizziAzienda(utente.getId());
+                            } else {
+                                indirizziSalvati = spedModel.getIndirizziPrivato(utente.getId());
+                            }
                             %>
 
                             <% if (indirizziSalvati != null && !indirizziSalvati.isEmpty()) { %>
@@ -68,14 +69,14 @@
                             <% } else { %>
                                 <input type="hidden" name="id_indirizzo_selezionato" value="residenza_default">
                                 <span class="checkout-text-fallback">
-                                    ℹ️ Non hai configurato indirizzi aggiuntivi nel tuo profilo. L'ordine viaggerà verso la tua **residenza registrata**:
-                                    <br><strong class="final-price"><%= utente.getIndirizzo() %>, <%= utente.getCap() %> <%= utente.getComune() %></strong>
+                                    ℹ️ Non hai configurato indirizzi aggiuntivi nel tuo profilo. L'ordine viaggerà verso la tua residenza registrata:
+                                    
                                 </span>
                             <% } %>
                             
                             <p class="checkout-link-wrapper">
                                 Hai bisogno di spedire altrove? 
-                                <a href="${pageContext.request.contextPath}/NavigazioneServlet?page=profilo" class="link-profilo">Aggiungi un nuovo indirizzo dalla tua area personale</a>
+                                <a href="${pageContext.request.contextPath}/NavigazioneServlet?page=profilo" class="link-profilo">Aggiungi un nuovo indirizzo</a>
                             </p>
                         </div>
 
@@ -125,6 +126,7 @@
                     </div>
                 </div>
 
+            </div>
             </div>
         <%
             }

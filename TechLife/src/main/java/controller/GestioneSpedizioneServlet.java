@@ -25,12 +25,13 @@ public class GestioneSpedizioneServlet extends HttpServlet {
         HttpSession session = request.getSession();
         
         UtenteBean utenteLoggato = (UtenteBean) session.getAttribute("utente");
-        String tipoUtente = (String) session.getAttribute("tipo"); 
 
-        if (utenteLoggato == null || tipoUtente == null) {
+        if (utenteLoggato == null) {
             response.sendRedirect(request.getContextPath() + "/errore.jsp");
             return;
         }
+
+        String tipoUtente = ("Azienda / P.IVA".equals(utenteLoggato.getCognome())) ? "azienda" : "privato";
 
         String azione = request.getParameter("azione");
         SpedizioneDAO model = new SpedizioneDAO();

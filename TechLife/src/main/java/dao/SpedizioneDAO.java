@@ -20,6 +20,8 @@ public class SpedizioneDAO {
 
         try {
             connection = DSConnectionPool.getConnection();
+            connection.setAutoCommit(false);
+            
             ps = connection.prepareStatement(sql);
             ps.setInt(1, bean.getIdUtenteAzienda());
             ps.setString(2, bean.getEmail());
@@ -34,7 +36,10 @@ public class SpedizioneDAO {
             System.out.println("DEBUG SPEDIZIONE: aggiungiIndirizzoUtente completato con commit!");
         } finally {
             if (ps != null) ps.close();
-            if (connection != null) connection.close();
+            if (connection != null) {
+            	connection.setAutoCommit(true);
+            	connection.close();
+            }
         }
     }
 	
@@ -46,6 +51,7 @@ public class SpedizioneDAO {
 
         try {
             connection = DSConnectionPool.getConnection();
+            connection.setAutoCommit(false);
             ps = connection.prepareStatement(sql);
             ps.setInt(1, bean.getIdUtenteAzienda());
             ps.setString(2, bean.getEmail());
@@ -61,7 +67,10 @@ public class SpedizioneDAO {
             System.out.println("DEBUG SPEDIZIONE: aggiungiIndirizzoAzienda completato con commit!");
         } finally {
             if (ps != null) ps.close();
-            if (connection != null) connection.close();
+            if (connection != null) {
+            	connection.setAutoCommit(true);
+            	connection.close();
+            }
         }
     }
 	
@@ -74,6 +83,7 @@ public class SpedizioneDAO {
 
         try {
             connection = DSConnectionPool.getConnection();
+            connection.setAutoCommit(false);
             ps = connection.prepareStatement(sql);
             ps.setInt(1, idUtente);
 
@@ -92,7 +102,10 @@ public class SpedizioneDAO {
             }
         } finally {
             if (ps != null) ps.close();
-            if (connection != null) connection.close();
+            if (connection != null) {
+            	connection.setAutoCommit(true);
+            	connection.close();
+            }
         }
         return lista;
     }
@@ -106,6 +119,7 @@ public class SpedizioneDAO {
 
         try {
             connection = DSConnectionPool.getConnection();
+            connection.setAutoCommit(false);
             ps = connection.prepareStatement(sql);
             ps.setInt(1, idAzienda);
 
@@ -125,7 +139,10 @@ public class SpedizioneDAO {
             }
         } finally {
             if (ps != null) ps.close();
-            if (connection != null) connection.close();
+            if (connection != null) {
+            		connection.setAutoCommit(true);
+            		connection.close();            	
+            }
         }
         return lista;
     }
@@ -139,6 +156,7 @@ public class SpedizioneDAO {
 
         try {
             connection = DSConnectionPool.getConnection();
+            connection.setAutoCommit(false);
             ps = connection.prepareStatement(sql);
             ps.setInt(1, idSpedizione);
 
@@ -152,7 +170,10 @@ public class SpedizioneDAO {
             throw e;
         } finally {
             if (ps != null) ps.close();
-            if (connection != null) connection.close();
+            if (connection != null) {
+            	connection.setAutoCommit(true);
+            	connection.close();
+            }
         }
     }
 

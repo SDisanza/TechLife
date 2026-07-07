@@ -85,6 +85,7 @@ public class OrdineServlet extends HttpServlet {
 
         try {
             connection = DSConnectionPool.getConnection();
+            connection.setAutoCommit(false);
             ps = connection.prepareStatement(sql);
             ps.setInt(1, utente.getId());
             ps.setString(2, tipoUtente != null ? tipoUtente : "privato");
@@ -96,7 +97,9 @@ public class OrdineServlet extends HttpServlet {
 
             // Passiamo i dati alla pagina della fattura prima di svuotare il carrello
             request.setAttribute("indirizzoSpedizione", indirizzoFinale);
-            request.setAttribute("fatturaCarrello", carrello);
+            request.setAttribute("vociFattura", new java.util.HashMap<>(carrello.getElementi()));
+            request.setAttribute("totaleFattura", carrello.getPrezzoTotale());
+            
             
             // Creiamo un numero di fattura fittizio univoco
             String numeroFattura = "FT-" + System.currentTimeMillis() % 100000;
@@ -127,6 +130,7 @@ public class OrdineServlet extends HttpServlet {
             if (ps != null) try { ps.close(); } catch (SQLException e) { e.printStackTrace(); }
             if (connection != null) {
                 try {
+                	connection.setAutoCommit(true);
                     connection.close();
                 } catch (SQLException e) {
                     e.printStackTrace();

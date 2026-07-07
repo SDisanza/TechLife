@@ -8,108 +8,128 @@
     <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style/style.css">
 </head>
 <body>
-<nav class="navbar-top">
-        <div class="nav-left">
-            <a href="${pageContext.request.contextPath}/NavigazioneServlet?page=homelogin" class="nav-link-home">&larr; Torna alla Home</a>
-        </div>
-    </nav>
 
-    <%-- MESSAGGIO DI CONFERMA ORDINE--%>
-    <div class="invoice-box" style="border-color: #4cd964; margin-bottom: 0; padding-bottom: 15px; text-align: center;">
-        <h2 style="color: #4cd964; margin: 0;">🎉 Grazie! Il tuo ordine è andato a buon fine.</h2>
-        <p style="color: #ccc; margin: 5px 0 0 0; font-size: 0.95em;">L'acquisto è stato registrato nei nostri sistemi. Trovi il riepilogo e i dettagli fiscali qui sotto.</p>
+    <div class="nav-back">
+        <a href="${pageContext.request.contextPath}/NavigazioneServlet?page=homelogin">&larr; Torna alla Home</a>
     </div>
 
     <%
         UtenteBean utente = (UtenteBean) session.getAttribute("utente");
-        Carrello carrello = (Carrello) request.getAttribute("fatturaCarrello");
+        // Leggiamo i dati congelati che abbiamo passato dalla Servlet
+        Map<ProdottoBean, Integer> vociFattura = (Map<ProdottoBean, Integer>) request.getAttribute("vociFattura");
+        Double totaleFattura = (Double) request.getAttribute("totaleFattura");
         String indirizzoSpedizione = (String) request.getAttribute("indirizzoSpedizione");
         String numeroFattura = (String) request.getAttribute("numeroFattura");
         String tipoUtente = (String) session.getAttribute("tipo");
 
-        if (utente != null && carrello != null) {
+        if (utente != null && vociFattura != null) {
     %>
-        <div class="invoice-box">
-            <div class="invoice-header">
-                <div>
-                    <h2>TechLife S.r.l.</h2>
-                    <p class="cart-prod-cat">
+    <div class="cart-page-container">
+
+        <div class="about-card">
+            <h2 class="final-price">🎉 Grazie! Il tuo ordine è andato a buon fine.</h2>
+            <p class="cart-prod-cat">L'acquisto è stato registrato nei nostri sistemi. Trovi il riepilogo e i dettagli fiscali qui sotto.</p>
+        </div>
+
+        <div class="about-card">
+            
+            <div class="profile-header">
+                <h2>FATTURA / RICEVUTA</h2>
+                <p><strong>Numero:</strong> <%= numeroFattura %></p>
+                <p><strong>Data:</strong> <%= new java.text.SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date()) %></p>
+            </div>
+
+            <div class="summary-row">
+                <div class="admin-info-text text-left">
+                    <span class="info-label">TechLife S.r.l.</span>
+                    <span class="cart-prod-cat text-left">
                         Via dell'Innovazione, 42<br>
-                        84044 Battipaglia (SA)<br>
+                        84091 Battipaglia (SA)<br>
                         P.IVA: 01234567890<br>
                         PEC: techlife@legalmail.it
-                    </p>
-                </div>
-                <div style="text-align: right;">
-                    <h1 class="final-price">FATTURA/RICEVUTA</h1>
-                    <p><strong>Numero:</strong> <%= numeroFattura %></p>
-                    <p><strong>Data:</strong> <%= new java.text.SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date()) %></p>
+                    </span>
                 </div>
             </div>
 
-            <div class="invoice-details">
-                <div>
-                    <h4 class="final-price">Intestatario Fattura:</h4>
-                    <strong><%= utente.getNome() %> <%= "azienda".equals(tipoUtente) ? "" : utente.getCognome() %></strong><br>
-                    Identificativo Fiscale: <%= utente.getcodiceFiscale() %><br>
-                    Email: <%= utente.getEmail() %>
-                    <% if("azienda".equals(tipoUtente) && utente.getPec() != null) { %>
-                        <br>PEC: <%= utente.getPec() %>
-                    <% } %>
+            <br><br>
+
+            <div class="summary-row">
+                <div class="admin-info-text text-left">
+                    <span class="info-label">Intestatario Fattura:</span>
+                    <span class="cart-prod-cat text-left">
+                        <strong><%= utente.getNome() %> <%= "azienda".equals(tipoUtente) ? "" : utente.getCognome() %></strong><br>
+                        Identificativo Fiscale: <%= utente.getcodiceFiscale() %><br>
+                        Email: <%= utente.getEmail() %>
+                        <% if("azienda".equals(tipoUtente) && utente.getPec() != null) { %>
+                            <br>PEC: <%= utente.getPec() %>
+                        <% } %>
+                    </span>
                 </div>
-                <div>
-                    <h4 class="final-price">Destinazione Spedizione:</h4>
-                    <p><%= indirizzoSpedizione %></p>
+                
+                <div class="admin-info-text text-left">
+                    <span class="info-label">Destinazione Spedizione:</span>
+                    <span class="cart-prod-cat text-left">
+                        <%= indirizzoSpedizione %>
+                    </span>
                 </div>
             </div>
 
-            <table class="invoice-table">
+            <br>
+
+            <table class="cart-table">
                 <thead>
                     <tr>
                         <th>Dispositivo</th>
                         <th>Categoria</th>
-                        <th style="text-align: center;">Quantità</th>
-                        <th style="text-align: right;">Prezzo Singolo</th>
-                        <th style="text-align: right;">Totale</th>
+                        <th>Quantità</th>
+                        <th>Prezzo Singolo</th>
+                        <th>Totale</th>
                     </tr>
                 </thead>
                 <tbody>
                     <% 
-                        for (Map.Entry<ProdottoBean, Integer> entry : carrello.getElementi().entrySet()) { 
+                        for (Map.Entry<ProdottoBean, Integer> entry : vociFattura.entrySet()) { 
                             ProdottoBean prodotto = entry.getKey();
                             int qta = entry.getValue();
                     %>
                         <tr>
-                            <td><%= prodotto.getNome() %></td>
-                            <td><%= prodotto.getCategoria() %></td>
-                            <td style="text-align: center;"><%= qta %></td>
-                            <td style="text-align: right;">€ <%= String.format(Locale.US, "%,.2f", prodotto.getPrezzo()) %></td>
-                            <td style="text-align: right;"><strong>€ <%= String.format(Locale.US, "%,.2f", prodotto.getPrezzo() * qta) %></strong></td>
+                            <td><strong><%= prodotto.getNome() %></strong></td>
+                            <td class="cart-prod-cat text-left"><%= prodotto.getCategoria() %></td>
+                            <td><%= qta %></td>
+                            <td>€ <%= String.format(Locale.US, "%,.2f", prodotto.getPrezzo()) %></td>
+                            <td class="final-price">€ <%= String.format(Locale.US, "%,.2f", prodotto.getPrezzo() * qta) %></td>
                         </tr>
                     <% } %>
                 </tbody>
             </table>
 
-            <div class="invoice-total-block">
-                <p>Spedizione: <strong class="final-price">GRATUITA</strong></p>
-                <h2>Totale Complessivo: <span class="final-price">€ <%= String.format(Locale.US, "%,.2f", carrello.getPrezzoTotale()) %></span></h2>
+            <div class="summary-row total-row">
+                <span>Spedizione: <strong class="final-price">GRATUITA</strong></span>
+                <span>Totale Complessivo: <strong class="final-price">€ <%= String.format(Locale.US, "%,.2f", totaleFattura) %></strong></span>
             </div>
 
-            <div style="text-align: center; margin-top: 40px; border-top: 1px dashed #2e2e4e; padding-top: 20px;">
+            <div class="logout-container">
                 <p class="cart-prod-cat">Grazie per aver scelto TechLife. Dispositivo medico salvavita conforme alle direttive CE.</p>
-                <button onclick="window.print();" class="no-print-btn">Stampa o Salva in PDF</button>
+                <button onclick="window.print();" class="btn-register">Stampa</button>
+            </div>
+            
+        </div>
+    </div>
+    
+    <% } else { %>
+    <div class="error-page-container">
+        <div class="error-card">
+            <h2 class="error-code-title">⚠️</h2>
+            <div class="error-subtitle">
+                <h2>Dati non disponibili</h2>
+            </div>
+            <p class="error-description">La fattura richiesta non è più disponibile in questa sessione o c'è stato un errore nel caricamento.</p>
+            <div class="error-actions">
+                <a href="${pageContext.request.contextPath}/NavigazioneServlet?page=homelogin" class="btn-register text-center-link">Torna alla Home</a>
             </div>
         </div>
-    <% 
-        } else { 
-    %>
-        <div class="empty-cart-block">
-            <h3>Impossibile recuperare i dati della fattura.</h3>
-            <a href="${pageContext.request.contextPath}/NavigazioneServlet?page=homelogin" class="no-print-btn">Torna alla Home</a>
-        </div>
-    <% 
-        } 
-    %>
+    </div>
+    <% } %>
 
 </body>
 </html>
