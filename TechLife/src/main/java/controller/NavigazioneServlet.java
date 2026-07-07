@@ -188,6 +188,7 @@ public class NavigazioneServlet extends HttpServlet {
             default:
                 request.getRequestDispatcher("/WEB-INF/view/errore.jsp").forward(request, response);
                 break;
+                
             case "admin":
                 HttpSession sessionAdmin = request.getSession();
                 String ruoloAdmin = (String) sessionAdmin.getAttribute("tipo");
@@ -213,10 +214,37 @@ public class NavigazioneServlet extends HttpServlet {
                     e.printStackTrace();
                     System.out.println("DEBUG ADMIN: Errore nel caricamento dei dati della dashboard.");
                 }
+        
                 
                 request.getRequestDispatcher("/WEB-INF/view/ALogin/dashboard.jsp").forward(request, response);
                 break;
-        }
+                
+            case "listaClienti": 
+                sessionAdmin = request.getSession();
+                ruoloAdmin = (String) sessionAdmin.getAttribute("tipo");
+                
+                if (!"admin".equals(ruoloAdmin)) {
+                    response.sendRedirect(request.getContextPath() + "/NavigazioneServlet?page=login");
+                    return;
+                }
+                
+                request.getRequestDispatcher("/WEB-INF/view/ALogin/clienti.jsp").forward(request, response);
+                break;
+            
+
+            case "listaOrdini": 
+                sessionAdmin = request.getSession();
+                ruoloAdmin = (String) sessionAdmin.getAttribute("tipo");
+                
+                if (!"admin".equals(ruoloAdmin)) {
+                    response.sendRedirect(request.getContextPath() + "/NavigazioneServlet?page=login");
+                    return;
+                }
+                
+                request.getRequestDispatcher("/WEB-INF/view/ALogin/ordini.jsp").forward(request, response);
+                break;
+        
+            }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 

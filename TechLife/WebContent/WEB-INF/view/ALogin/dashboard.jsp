@@ -10,13 +10,15 @@
 <body class="admin-dashboard-layout">
 
     <nav class="navbar-top">
-        <div class="nav-left">
-            <span class="nav-link-home">Pannello Controllo Admin</span>
-        </div>
-        <div class="logout-container admin-logout-fix">
-            <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn-logout">Logout</a>
-        </div>
-    </nav>
+	    <div class="nav-left">
+	        <a href="${pageContext.request.contextPath}/NavigazioneServlet?page=admin" class="nav-link-home">Dashboard</a>
+	        <a href="${pageContext.request.contextPath}/AdminServlet?azione=listaClienti" class="nav-link-home">Gestione Clienti</a>
+	        <a href="${pageContext.request.contextPath}/AdminServlet?azione=listaOrdini" class="nav-link-home">Visualizza Ordini</a>
+	    </div>
+	    <div class="nav-right">
+	        <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn-logout admin-logout-fix">Logout</a>
+	    </div>
+	</nav>
 
     <div class="checkout-page-container">
         <h1>Gestione Piattaforma</h1>
